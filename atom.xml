@@ -541,10 +541,10 @@ ionic run ios -l -c -s --debug # 这个是啥就看提示吧 ionic run ios --hel
   
   <entry>
     <title><![CDATA[一个简单的项目架构]]></title>
-    <link href="http://blog.zhuxiaowu.com/2015/01/29/a-simple-system-architecture/"/>
-    <id>http://blog.zhuxiaowu.com/2015/01/29/a-simple-system-architecture/</id>
-    <published>2015-01-29T11:38:17.000Z</published>
-    <updated>2016-05-28T08:25:02.000Z</updated>
+    <link href="http://blog.zhuxiaowu.com/2015/05/01/a-simple-system-architecture/"/>
+    <id>http://blog.zhuxiaowu.com/2015/05/01/a-simple-system-architecture/</id>
+    <published>2015-05-01T11:38:17.000Z</published>
+    <updated>2016-05-28T09:11:01.000Z</updated>
     <content type="html"><![CDATA[<p>说学习sails好久了, 之所以想学它, 只是因为原来做rails时被它各种蹩脚玩意给折腾的。</p>
 <p>有些人很喜欢rails, 开始我也很喜欢, 各种库, 各种支持, 加上优雅的语法。熟悉后就各种烦各种不想用, 这货真是啥玩意都往里加, 啥新东西都想支持, 不再像它刚开始时的那么纯粹, 简便。 啥时候rails的组件能像sails那样醒目, 库能像glup提倡的那样: 每个插件只完成一个功能就好了, 别做万能的Rambo好不！！！</p>
 <p>额， 这仅限于4.x及以前版本, 好久没用过了是不是有了变化不知道, 希望能变轻点吧。</p>

@@ -1,0 +1,1147 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="ruby, rails, sails" />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="bpgoing的博客" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.0" />
+
+
+
+
+
+
+<meta name="description" content="年后开始尝试用ionic来做个移动App，之前也列出了需要解决的问题，今天算是把UI都搞的差不多了，接着就把权限认证也搞上吧。一通Google+乱问搜罗到了这篇文章，先不管行不行，直接翻译了再说(按照自己的意思翻译的)，不行咱们再找别的方案。
+原文地址 https://devdactic.com/user-auth-angularjs-ionic/
+原作者说：在Ionic+AngularJS做的H">
+<meta property="og:type" content="article">
+<meta property="og:title" content="angularjs ionic实现用户认证">
+<meta property="og:url" content="http://blog.zhuxiaowu.com/2016/02/16/user-auth-angularjs-ionic/index.html">
+<meta property="og:site_name" content="bpgoing的博客">
+<meta property="og:description" content="年后开始尝试用ionic来做个移动App，之前也列出了需要解决的问题，今天算是把UI都搞的差不多了，接着就把权限认证也搞上吧。一通Google+乱问搜罗到了这篇文章，先不管行不行，直接翻译了再说(按照自己的意思翻译的)，不行咱们再找别的方案。
+原文地址 https://devdactic.com/user-auth-angularjs-ionic/
+原作者说：在Ionic+AngularJS做的H">
+<meta property="og:image" content="http://blog.zhuxiaowu.com/uploads/auth-simple-demo.png">
+<meta property="og:updated_time" content="2016-02-24T11:37:58.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="angularjs ionic实现用户认证">
+<meta name="twitter:description" content="年后开始尝试用ionic来做个移动App，之前也列出了需要解决的问题，今天算是把UI都搞的差不多了，接着就把权限认证也搞上吧。一通Google+乱问搜罗到了这篇文章，先不管行不行，直接翻译了再说(按照自己的意思翻译的)，不行咱们再找别的方案。
+原文地址 https://devdactic.com/user-auth-angularjs-ionic/
+原作者说：在Ionic+AngularJS做的H">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: '[object Object]',
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> angularjs ionic实现用户认证 | bpgoing的博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?be39d604d8ac096020a1e2fb0ed25e77";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">bpgoing的博客</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">6年+的互联网开发经验</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu menu-left">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+      
+      
+        <li class="menu-item menu-item-search">
+          <a href="#" class="st-search-show-outputs">
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'B1dW3jMoKFneSe9R43Pe','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                angularjs ionic实现用户认证
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-02-16T15:15:19+08:00" content="2016-02-16">
+              2016-02-16
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/02/16/user-auth-angularjs-ionic/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/02/16/user-auth-angularjs-ionic/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>年后开始尝试用ionic来做个移动App，之前也列出了需要解决的问题，今天算是把UI都搞的差不多了，接着就把权限认证也搞上吧。<br>一通Google+乱问搜罗到了这篇文章，先不管行不行，直接翻译了再说(按照自己的意思翻译的)，不行咱们再找别的方案。</p>
+<p>原文地址 <a href="https://devdactic.com/user-auth-angularjs-ionic/" target="_blank" rel="external">https://devdactic.com/user-auth-angularjs-ionic/</a></p>
+<p>原作者说：在Ionic+AngularJS做的Hybrid App中实现登陆和用户认证系统是大家遇到的最难的问题之一，他之前写过一个简单的登陆<a href="https://devdactic.com/simple-login-example-with-ionic-and-angularjs/" target="_blank" rel="external">simple login with Ionic and AngularJS</a>居然是每天访问最多的(反正我没看到，这里是作者写的文章里被浏览最多的)。所以作者又有了奉献精神，当当当，写出了这篇完整的权限认证系统！在此小弟感谢，要不您的文章我还得再花几天时间捣鼓！ O(∩_∩)O</p>
+<p>认证系统嘛，从以下三个角度来一一解决</p>
+<ol>
+<li>用户登陆和会话保持(后端基于token认证)。</li>
+<li>基于路由的授权控制</li>
+<li>会话失效，重新登陆</li>
+</ol>
+<p>这里提供了一份完整的源代码 <a href="/uploads/devdactic-authentication.zip" title="原网站下载下来的">点击下载</a>，一个基于Ionic框架开发的，但大多数只是AngularJS逻辑，所以不论你想要用到AngularJS App 还是 Hybrid App都没问题，接着往下看吧。还有需要一个后端程序，这是原作者关于后端写的一篇文章 <a href="https://devdactic.com/restful-api-user-authentication-1/" target="_blank" rel="external">RESTful API User Authentication with Node.js and AngularJS</a>。</p>
+<h3 id="u51C6_u5907_u5DE5_u4F5C"><a href="#u51C6_u5907_u5DE5_u4F5C" class="headerlink" title="准备工作"></a>准备工作</h3><p>首先创建个Ionic项目，关于Ionic的开发环境可以看<a href="http://blog.zhuxiaowu.com/2016/02/12/ionic-angularjs-cordova-env-development/">Ionic+Angularjs+PhoneGap开发环境搭建</a></p>
+<pre><code>$ ionic start devdactic-auth blank
+$ cd devdactic-auth
+$ bower install angular-mocks --save # 经测试这玩意不用装，没啥用，就是模拟请求的。
+</code></pre><p>打开项目，找到<code>www/js</code>目录，创建3个文件，分别是<code>controllers.js</code> <code>services.js</code>和<code>constants.js</code>。</p>
+<p>之后在index.html引入</p>
+<pre><code>&lt;script src=&quot;js/controllers.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;js/services.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;js/constants.js&quot;&gt;&lt;/script&gt;
+&lt;!-- 
+如果直接源码下载angular-mocks.js
+并且放到了www/lib/ionic/js/angular/angular-mocks.js
+那么就不用在此引入。
+--&gt;
+&lt;script src=&quot;lib/angular-mocks/angular-mocks.js&quot;&gt;&lt;/script&gt;
+</code></pre><p>还要修改<code>www/js/app.js</code>文件，引入angular-mocks模块</p>
+<pre><code>angular.module(&apos;starter&apos;, [&apos;ionic&apos;, &apos;ngMockE2E&apos;])
+</code></pre><p>再创建5个HTML文件放到 www/templates目录(没有此目录自行创建)，分别是 <code>login.html</code>, <code>main.html</code>, <code>dashboard.html</code>, <code>public.html</code>, <code>admin.html</code>。</p>
+<p>OK，准备工作就这些，下面开始愉(苦)快(逼)的编码吧。</p>
+<h3 id="u5728APP_u91CC_u521B_u5EFA_u4E00_u4E9B_u5E38_u91CF"><a href="#u5728APP_u91CC_u521B_u5EFA_u4E00_u4E9B_u5E38_u91CF" class="headerlink" title="在APP里创建一些常量"></a>在APP里创建一些常量</h3><p>在创建route之前，需要先定义一些在全局常量，这样比用事件广播或者字符串定义的角色要简单。 编辑<code>www/js/constants.js</code>文件</p>
+<pre><code>angular.module(&apos;starter&apos;)
+
+.constant(&apos;AUTH_EVENTS&apos;, {
+    notAuthenticated: &apos;auth-not-authenticated&apos;,
+    notAuthorized: &apos;auth-not-authorized&apos;
+})
+
+.constant(&apos;USER_ROLES&apos;, {
+    admin: &apos;admin_role&apos;,
+    public: &apos;public_role&apos;
+});
+</code></pre><p>很简单，现在我们就可以在程序中使用这些常量了。并且看到了这个 <a href="https://medium.com/opinionated-angularjs/techniques-for-authentication-in-angularjs-applications-7bbf0346acec#.xyr6n5u82" target="_blank" rel="external">AngularJS中的身份验证应用程序的技术</a>, 感谢！</p>
+<h3 id="u5F00_u59CB_u521B_u5EFA_u89C6_u56FE"><a href="#u5F00_u59CB_u521B_u5EFA_u89C6_u56FE" class="headerlink" title="开始创建视图"></a>开始创建视图</h3><p>程序包含一个登录页面和3个tab选项的布局，这些tab页都是需要身份验证，所以没登录前不能访问任何tab页面。就算在浏览器里运行，也不能直接通过URL来访问这些tab页面，这样才是确保你应用是最安全的。</p>
+<p>编辑<code>www/index.html</code>的body标签</p>
+<pre><code>&lt;body ng-app=&quot;starter&quot; ng-controller=&quot;AppCtrl&quot;&gt;
+    &lt;ion-nav-bar class=&quot;bar-balanced&quot;&gt;
+    &lt;/ion-nav-bar&gt;
+    &lt;ion-nav-view&gt;&lt;/ion-nav-view&gt;
+&lt;/body&gt;
+</code></pre><p>我们有一个导航栏(ion-nav-bar标签)和导航视图(ion-nav-view)元素将显示视图连接到路由，为了让程序尽快运行就先在创建个全部空的controllers。</p>
+<p>编辑<code>www/js/controllers.js</code></p>
+<pre><code>angular.module(&apos;starter&apos;)
+
+.controller(&apos;AppCtrl&apos;, function() {})
+.controller(&apos;LoginCtrl&apos;, function() {})
+.controller(&apos;DashCtrl&apos;, function() {});
+</code></pre><p>接着是登录页面，就创建两个input+一个登录按钮。</p>
+<p>编辑<code>www/templates/login.html</code></p>
+<pre><code>&lt;ion-view view-title=&quot;Sign-In&quot; name=&quot;login-view&quot;&gt;
+    &lt;ion-content class=&quot;padding&quot;&gt;
+        &lt;div class=&quot;list list-inset&quot;&gt;
+            &lt;label class=&quot;item item-input&quot;&gt;
+                &lt;input type=&quot;text&quot; placeholder=&quot;Username&quot; ng-model=&quot;data.username&quot;&gt;
+            &lt;/label&gt;
+            &lt;label class=&quot;item item-input&quot;&gt;
+                &lt;input type=&quot;password&quot; placeholder=&quot;Password&quot; ng-model=&quot;data.password&quot;&gt;
+            &lt;/label&gt;
+        &lt;/div&gt;
+        &lt;button class=&quot;button button-block button-positive&quot; ng-click=&quot;login(data)&quot;&gt;Login&lt;/button&gt;
+    &lt;/ion-content&gt;
+&lt;/ion-view&gt;
+</code></pre><p>下一个是登陆后的抽象视图，用于登录后的选项卡，并负责加载视图(这个只可意会，白话文我不太会讲，可能没太理解，有大神讲的比较清晰的跟俺留个言呗)。</p>
+<blockquote>
+<p>这里解释一下angular-ui-router的 abstract(抽象视图)属性</p>
+<p>我的理解是abstract抽象视图不能直接被激活，但是可以设置为被激活的子节点。</p>
+<p>就像你在A页面填入一些内容，但内容太多，有一项需要新打开一个B页面去选择，如果现在直接跳转到B页面，填写完成后再回到A页面，你就会发现一些问题(像A页面原来填写内容没有了)，那么这个时候你需要设置B页面为<code>abstract: ture</code>就不会再存在此问题了。</p>
+</blockquote>
+<p>编辑<code>www/templates/main.html</code></p>
+<pre><code>&lt;ion-view&gt;
+    &lt;ion-tabs class=&quot;tabs-icon-top tabs-balanced&quot;&gt;
+
+        &lt;ion-tab title=&quot;Dashboard&quot; icon=&quot;ion-home&quot; href=&quot;#/main/dash&quot;&gt;
+            &lt;ion-nav-view name=&quot;dash-tab&quot;&gt;&lt;/ion-nav-view&gt;
+        &lt;/ion-tab&gt;
+
+        &lt;ion-tab title=&quot;Public&quot; icon=&quot;ion-earth&quot; href=&quot;#/main/public&quot;&gt;
+            &lt;ion-nav-view name=&quot;public-tab&quot;&gt;&lt;/ion-nav-view&gt;
+        &lt;/ion-tab&gt;
+
+        &lt;ion-tab title=&quot;Secret&quot; icon=&quot;ion-nuclear&quot; href=&quot;#/main/admin&quot;&gt;
+            &lt;ion-nav-view name=&quot;admin-tab&quot;&gt;&lt;/ion-nav-view&gt;
+        &lt;/ion-tab&gt;
+
+    &lt;/ion-tabs&gt;
+&lt;/ion-view&gt;
+</code></pre><p>当用户登陆后，将跳转到Dashboard页面，页面中包含一个提示文字，一个注销按钮和3个其他请求的按钮。现在还不能运行，因为控制器和services.js还没写好(快点呗，真啰嗦，天朝程序猿就喜欢简单粗暴直接的)，但是view写好了，所以我们尽快看下我们程序吧(您也知道要快点了。。)</p>
+<p>编辑<code>www/templates/dashboard.html</code></p>
+<pre><code>&lt;ion-view view-title=&quot;Dashboard&quot; name=&quot;dashboard-view&quot;&gt;
+    &lt;ion-nav-buttons side=&quot;right&quot;&gt;
+        &lt;button class=&quot;button icon-left ion-log-out button-stable&quot; ng-click=&quot;logout()&quot;&gt;Logout&lt;/button&gt;
+    &lt;/ion-nav-buttons&gt;
+    &lt;ion-content class=&quot;padding&quot;&gt;
+        &lt;div class=&quot;row&quot;&gt;
+            &lt;div class=&quot;col text-center&quot;&gt;
+                &lt;h3 class=&quot;title&quot;&gt;Welcome !&lt;/h3&gt;
+                This could be your Dashboard.
+                &lt;br&gt;&lt;br&gt;&lt;br&gt;
+                &lt;button class=&quot;button button-full button-positive&quot; ng-click=&quot;performValidRequest()&quot;&gt;
+                    Make Valid Request
+                &lt;/button&gt;
+                &lt;button class=&quot;button button-full button-energized&quot; ng-click=&quot;performUnauthorizedRequest()&quot;&gt;
+                    Make Request for unauthorized resource
+                &lt;/button&gt;
+                &lt;button class=&quot;button button-full button-assertive&quot; ng-click=&quot;performInvalidRequest()&quot;&gt;
+                    Make Request without valid token
+                &lt;/button&gt;
+                &lt;br&gt;&lt;br&gt;
+                
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/ion-content&gt;
+&lt;/ion-view&gt;
+</code></pre><p>其他两个视图(<code>public.html</code>, <code>admin.html</code>)是基于用于角色保护的，所以视图只包含你看到的。<br>编辑 <code>www/templates/public.html</code></p>
+<pre><code>&lt;ion-view view-title=&quot;Public&quot; name=&quot;dashboard-view&quot;&gt;
+    &lt;ion-content class=&quot;padding&quot;&gt;
+        任何登陆的人都能看到！
+    &lt;/ion-content&gt;
+&lt;/ion-view&gt;
+</code></pre><p>最后是这个<code>www/templates/admin.html</code>，并且只有管理员才能看到！</p>
+<pre><code>&lt;ion-view view-title=&quot;Admin&quot; name=&quot;dashboard-view&quot;&gt;
+    &lt;ion-content class=&quot;padding&quot;&gt;
+        管理员才能看到的地方！
+    &lt;/ion-content&gt;
+&lt;/ion-view&gt;
+</code></pre><p>全部view就这些了，到现在还没啥特别的，就是一般程序。主要还是后面的程序，咱们继续，下面是路由，算是跟程序的一个照面。</p>
+<h3 id="u5B9E_u73B0_u57FA_u672C_u8DEF_u7531"><a href="#u5B9E_u73B0_u57FA_u672C_u8DEF_u7531" class="headerlink" title="实现基本路由"></a>实现基本路由</h3><p>这个demo的路由不是很复杂，一个登陆页面，一个有三个选项卡的页面，其中<code>main</code>这个抽象路由是抽象路线的模板，还有3个<code>main.*</code>对应的是3个选项页面。</p>
+<p>这里主要介绍一个地方是37-39行，链接管理员选项卡。这里做了权限控制，只有当用户<strong>USER_ROLES.admin</strong>时才可以访问这些页面。现在还不能正常运行，咱们接着往下走。</p>
+<p>编辑<code>www/js/app.js</code></p>
+<pre><code>.config(function ($stateProvider, $urlRouterProvider, USER_ROLES) {
+    $stateProvider
+    .state(&apos;login&apos;, {
+        url: &apos;/login&apos;,
+        templateUrl: &apos;templates/login.html&apos;,
+        controller: &apos;LoginCtrl&apos;
+    })
+    .state(&apos;main&apos;, {
+        url: &apos;/&apos;,
+        abstract: true,
+        templateUrl: &apos;templates/main.html&apos;
+    })
+    .state(&apos;main.dash&apos;, {
+        url: &apos;main/dash&apos;,
+        views: {
+            &apos;dash-tab&apos;: {
+                templateUrl: &apos;templates/dashboard.html&apos;,
+                controller: &apos;DashCtrl&apos;
+            }
+        }
+    })
+    .state(&apos;main.public&apos;, {
+        url: &apos;main/public&apos;,
+        views: {
+            &apos;public-tab&apos;: {
+                templateUrl: &apos;templates/public.html&apos;
+            }
+        }
+    })
+    .state(&apos;main.admin&apos;, {
+        url: &apos;main/admin&apos;,
+        views: {
+            &apos;admin-tab&apos;: {
+                templateUrl: &apos;templates/admin.html&apos;
+            }
+        },
+        data: {
+            authorizedRoles: [USER_ROLES.admin]
+        }
+    });
+
+    // Thanks to Ben Noblet!
+    $urlRouterProvider.otherwise(function ($injector, $location) {
+        var $state = $injector.get(&quot;$state&quot;);
+        $state.go(&quot;main.dash&quot;);
+    });
+})
+</code></pre><p>现在程序里已经进入了angular-mocks，所以可以添加很多东西到程序。添加以下内容到<code>www/js/app.js</code>，咱们运行看看结果。(译者去掉所有angular-mocks的东西就成功了)</p>
+<pre><code>.run(function($httpBackend){
+    $httpBackend.whenGET(/templates\/\w+.*/).passThrough();
+})
+</code></pre><p><img src="/uploads/auth-simple-demo.png" alt="权限认证简单demo" title="auth simple demo"></p>
+<h3 id="u540E_u7AEF_u6DFB_u52A0_u7528_u6237_u8BA4_u8BC1_u670D_u52A1"><a href="#u540E_u7AEF_u6DFB_u52A0_u7528_u6237_u8BA4_u8BC1_u670D_u52A1" class="headerlink" title="后端添加用户认证服务"></a>后端添加用户认证服务</h3><p>存储服务端token或者session-id使用localStorage，请求时把token放在http的头<code>$http.defaults.headers.common[&#39;X-Auth-Token&#39;] = &#39;token&#39;</code></p>
+<p>编辑<code>services.js</code></p>
+<pre><code>angular.module(&apos;starter&apos;)
+
+.service(&apos;AuthService&apos;, function($q, $http, USER_ROLES) {
+    var LOCAL_TOKEN_KEY = &apos;&apos;;
+    var username = &apos;&apos;;
+    var isAuthenticated = false; // 是否已授权
+    var role = &apos;&apos;;
+    var authToken;
+
+    function loadUserCredentials() {
+        var token = window.localStorage.getItem(LOCAL_TOKEN_KEY);
+        if (token) {
+            useCredentials(token);
+        }
+    }
+
+    function storeUserCredentials(token) {
+        window.localStorage.setItem(LOCAL_TOKEN_KEY, token);
+        useCredentials(token);
+    }
+
+    function useCredentials(token) {
+        username = token.split(&apos;.&apos;)[0];
+        isAuthenticated = true;
+        authToken = token;
+
+        if (username == &apos;admin&apos;) {
+            role = USER_ROLES.admin
+        }
+        if (username == &apos;user&apos;) {
+            role = USER_ROLES.public
+        }
+
+        // Set the token as header for your requests!
+        $http.defaults.headers.common[&apos;X-Auth-Token&apos;] = token;
+    }
+
+    function destroyUserCredentials() {
+        authToken = undefined;
+        username = &apos;&apos;;
+        isAuthenticated = false;
+        $http.defaults.headers.common[&apos;X-Auth-Token&apos;] = undefined;
+        window.localStorage.removeItem(LOCAL_TOKEN_KEY);
+    }
+
+    var login = function(name, pw) {
+        return $q(function(resolve, reject) {
+            if ((name == &apos;admin&apos; &amp;&amp; pw == &apos;1&apos;) || (name == &apos;user&apos; &amp;&amp; pw == &apos;1&apos;)) {
+                // Make a request and receive your auth token from your server
+                storeUserCredentials(name + &apos;.yourServerToken&apos;);
+                resolve(&apos;Login success.&apos;);
+            } else {
+                reject(&apos;Login Failed.&apos;);
+            }
+        });
+    };
+
+    var logout = function() {
+        destroyUserCredentials();
+    };
+
+    var isAuthorized = function(authorizedRoles) {
+        if (!angular.isArray(authorizedRoles)) {
+            authorizedRoles = [authorizedRoles];
+        }
+        return (isAuthenticated &amp;&amp; authorizedRoles.indexOf(role) !== -1);
+    };
+
+    loadUserCredentials();
+
+    return {
+        login: login,
+        logout: logout,
+        isAuthorized: isAuthorized,
+        isAuthenticated: function() {return isAuthenticated;},
+        username: function() {return username;},
+        role: function() {return role;}
+    };
+})
+</code></pre><p>像之前说的，我们不能检查token是否有效，所以我们设置一个拦截器，当用一个无效的token请求，拦截器会注意到$http响应的错误，并且播放一条消息到app。</p>
+<p>所以还要在<code>services.js</code>添加以下内容。</p>
+<pre><code>.factory(&apos;AuthInterceptor&apos;, function ($rootScope, $q, AUTH_EVENTS) {
+    return {
+        responseError: function (response) {
+            $rootScope.$broadcast({
+                401: AUTH_EVENTS.notAuthenticated,
+                403: AUTH_EVENTS.notAuthorized
+            }[response.status], response);
+            return $q.reject(response);
+        }
+    };
+})
+
+.config(function ($httpProvider) {
+    $httpProvider.interceptors.push(&apos;AuthInterceptor&apos;);
+});
+</code></pre><p>虽然这个请求是全局的配置，但依然需要控制器来配合</p>
+<pre><code>.controller(&apos;AppCtrl&apos;, function($scope, $state, $ionicPopup, AuthService, AUTH_EVENTS) {
+    $scope.username = AuthService.username();
+
+    $scope.$on(AUTH_EVENTS.notAuthorized, function(event) {
+        var alertPopup = $ionicPopup.alert({
+            title: &apos;Unauthorized!&apos;,
+            template: &apos;You are not allowed to access this resource.&apos;
+        });
+    });
+
+    $scope.$on(AUTH_EVENTS.notAuthenticated, function(event) {
+        AuthService.logout();
+        $state.go(&apos;login&apos;);
+        var alertPopup = $ionicPopup.alert({
+            title: &apos;Session Lost!&apos;,
+            template: &apos;Sorry, You have to login again.&apos;
+        });
+    });
+
+    $scope.setCurrentUsername = function(name) {
+        $scope.username = name;
+    };
+})
+</code></pre><p>notAuthorized事件告知用户权限不足,notAuthenticated事件是token过期需要登录等。之后又设置了个当前用户，这可以使用所有的子范围!</p>
+<p>之后是LoginCtrl</p>
+<pre><code>.controller(&apos;LoginCtrl&apos;, function($scope, $state, $ionicPopup, AuthService) {
+    $scope.data = {};
+
+    $scope.login = function(data) {
+        AuthService.login(data.username, data.password).then(function(authenticated) {
+            $state.go(&apos;main.dash&apos;, {}, {reload: true});
+            $scope.setCurrentUsername(data.username);
+        }, function(err) {
+            var alertPopup = $ionicPopup.alert({
+                title: &apos;Login failed!&apos;,
+                template: &apos;Please check your credentials!&apos;
+            });
+        });
+    };
+})
+</code></pre><p>接着是DashCtrl</p>
+<pre><code>.controller(&apos;DashCtrl&apos;, function($scope, $state, $http, $ionicPopup, AuthService) {
+    $scope.logout = function() {
+        AuthService.logout();
+        $state.go(&apos;login&apos;);
+    };
+
+    $scope.performValidRequest = function() {
+        $http.get(&apos;http://localhost:8100/valid&apos;).then(
+            function(result) {
+                $scope.response = result;
+            });
+    };
+
+    $scope.performUnauthorizedRequest = function() {
+        $http.get(&apos;http://localhost:8100/notauthorized&apos;).then(
+            function(result) {
+                // No result here..
+            }, function(err) {
+                $scope.response = err;
+            });
+    };
+
+    $scope.performInvalidRequest = function() {
+        $http.get(&apos;http://localhost:8100/notauthenticated&apos;).then(
+            function(result) {
+                // No result here..
+            }, function(err) {
+                $scope.response = err;
+            });
+    };
+});
+</code></pre><h3 id="u62E6_u622A_u6240_u6709_u6539_u53D8_u7684_u72B6_u6001"><a href="#u62E6_u622A_u6240_u6709_u6539_u53D8_u7684_u72B6_u6001" class="headerlink" title="拦截所有改变的状态"></a>拦截所有改变的状态</h3><p>现在没有任何检查用户的状态，这就意味着用户可以改变其URL来访问想要访问的页面。这时需要添加路由更改事件.</p>
+<p>编辑 app.js 最下方添加</p>
+<pre><code>.run(function ($rootScope, $state, AuthService, AUTH_EVENTS) {
+    $rootScope.$on(&apos;$stateChangeStart&apos;, function (event,next, nextParams, fromState) {
+        if (&apos;data&apos; in next &amp;&amp; &apos;authorizedRoles&apos; in next.data) {
+            var authorizedRoles = next.data.authorizedRoles;
+            if (!AuthService.isAuthorized(authorizedRoles)) {
+                event.preventDefault();
+                $state.go($state.current, {}, {reload: true});
+                $rootScope.$broadcast(AUTH_EVENTS.notAuthorized);
+            }
+        }
+        if (!AuthService.isAuthenticated()) {
+            if (next.name !== &apos;login&apos;) {
+                event.preventDefault();
+                $state.go(&apos;login&apos;);
+            }
+        }
+    });
+});
+</code></pre><p>译者试验了，的确很好用，但是有些地方并不合意。待俺先加上后端服务，修改修改再上来更新吧！！</p>
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/02/12/ionic-angularjs-cordova-env-development/" rel="next" title="Ionic+Angularjs+PhoneGap开发环境搭建">
+                <i class="fa fa-chevron-left"></i> Ionic+Angularjs+PhoneGap开发环境搭建
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/02/19/ionic-angularjs-cordova-camera-development/" rel="prev" title="Ionic Hybrid App调用Camera+读取相册照片">
+                Ionic Hybrid App调用Camera+读取相册照片 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/02/16/user-auth-angularjs-ionic/"
+           data-title="angularjs ionic实现用户认证" data-url="http://blog.zhuxiaowu.com/2016/02/16/user-auth-angularjs-ionic/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="朱晓武" />
+          <p class="site-author-name" itemprop="name">朱晓武</p>
+          <p class="site-description motion-element" itemprop="description">6年+的互联网开发经验</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">6</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">1</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">8</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/bpgoing" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#u51C6_u5907_u5DE5_u4F5C"><span class="nav-number">1.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u5728APP_u91CC_u521B_u5EFA_u4E00_u4E9B_u5E38_u91CF"><span class="nav-number">2.</span> <span class="nav-text">在APP里创建一些常量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u5F00_u59CB_u521B_u5EFA_u89C6_u56FE"><span class="nav-number">3.</span> <span class="nav-text">开始创建视图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u5B9E_u73B0_u57FA_u672C_u8DEF_u7531"><span class="nav-number">4.</span> <span class="nav-text">实现基本路由</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u540E_u7AEF_u6DFB_u52A0_u7528_u6237_u8BA4_u8BC1_u670D_u52A1"><span class="nav-number">5.</span> <span class="nav-text">后端添加用户认证服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u62E6_u622A_u6240_u6709_u6539_u53D8_u7684_u72B6_u6001"><span class="nav-number">6.</span> <span class="nav-text">拦截所有改变的状态</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="icon-next-heart fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">朱晓武</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  
+
+
+  
+
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.0"></script>
+
+
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"bpgoing"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+  
+  
+
+  
+  
+
+
+</body>
+</html>

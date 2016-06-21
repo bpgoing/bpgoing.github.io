@@ -73,7 +73,7 @@ https://github.com/EddieLa/JOB 记得gh-pages分支
 目前觉得最好用的1d解码应该是这个
 https://github.com/EddieLa/JOB 记得gh-pages分支
 最好用的2d解码是这">
-<meta property="og:updated_time" content="2016-06-21T11:33:22.000Z">
+<meta property="og:updated_time" content="2016-06-21T12:07:22.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="html5配合摄像头实现扫码">
 <meta name="twitter:description" content="最近做管理项目，需要扫码，之后再做后续操作，像超市一样。本想着买个扫码枪，jd一看这个贵呀。。操作还麻烦，web管理系统，还得绑定keydown之类的乱七八糟，算了。
@@ -330,8 +330,10 @@ https://github.com/EddieLa/JOB 记得gh-pages分支
 <pre><code>Refused to load media from &apos;blob:http%3A//localhost%3A3000/0fde46b7-3913-47e3-8941-1a85a6ab99c8&apos; because it violates the following Content Security Policy directive: &quot;default-src *&quot;. Note that &apos;media-src&apos; was not explicitly set, so &apos;default-src&apos; is used as a fallback.
 
 undefined:1 Uncaught (in promise) DOMException: Failed to load because no supported source was found.
-</code></pre><p>感觉像angular地址栏URL的事情。blob地址是/，但URL是/#/xxxx/xxx。</p>
-<p>看看这俩</p>
+</code></pre><p>这么解决 index.html里注释上一行,加下一行</p>
+<pre><code>&lt;!-- &lt;meta http-equiv=&quot;Content-Security-Policy&quot; content=&quot;default-src *; style-src &apos;self&apos; &apos;unsafe-inline&apos;; script-src &apos;self&apos; &apos;unsafe-inline&apos; &apos;unsafe-eval&apos;&quot;&gt; --&gt;
+&lt;meta http-equiv=&quot;Content-Security-Policy&quot; content=&quot;script-src &apos;self&apos; http://localhost:3000 &apos;unsafe-inline&apos; &apos;unsafe-eval&apos;;&quot;&gt;
+</code></pre><p>看看这俩</p>
 <p><a href="https://github.com/meteor/meteor/tree/devel/packages/browser-policy" target="_blank" rel="external">https://github.com/meteor/meteor/tree/devel/packages/browser-policy</a></p>
 <p><a href="https://github.com/meteor/mobile-packages/issues/80" target="_blank" rel="external">https://github.com/meteor/mobile-packages/issues/80</a></p>
 <p>还有这俩, 我用的第一个最简单的，不喜欢太复杂，坑爹。</p>

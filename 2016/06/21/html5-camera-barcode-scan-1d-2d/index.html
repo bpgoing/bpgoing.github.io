@@ -73,7 +73,7 @@ https://github.com/EddieLa/JOB 记得gh-pages分支
 目前觉得最好用的1d解码应该是这个
 https://github.com/EddieLa/JOB 记得gh-pages分支
 最好用的2d解码是这">
-<meta property="og:updated_time" content="2016-06-21T10:40:44.000Z">
+<meta property="og:updated_time" content="2016-06-21T11:33:22.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="html5配合摄像头实现扫码">
 <meta name="twitter:description" content="最近做管理项目，需要扫码，之后再做后续操作，像超市一样。本想着买个扫码枪，jd一看这个贵呀。。操作还麻烦，web管理系统，还得绑定keydown之类的乱七八糟，算了。
@@ -343,7 +343,7 @@ undefined:1 Uncaught (in promise) DOMException: Failed to load because no suppor
 <p>演示效果</p>
 <p><video id="video" style="width:300px;"></video></p>
 <p><canvas id="barcode-canvas" style="display:none;"></canvas></p>
-<script src="/uploads/barcode2d.min.js"></script>
+<script src="/javascripts/barcode2d.min.js"></script>
 
 <script>
     var video = document.getElementById('video');
@@ -356,7 +356,7 @@ undefined:1 Uncaught (in promise) DOMException: Failed to load because no suppor
         doDecode = false;
         console.log(result);
     }
-    DecoderWorker = new Worker("/uploads/barcode1d.min.js");
+    DecoderWorker = new Worker("/javascripts/barcode1d.min.js");
     DecoderWorker.onmessage = function(result){
         // 解析相同, 还要排错是不是ID
         if(result.data.success == "localization") {

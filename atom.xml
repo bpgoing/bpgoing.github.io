@@ -4,7 +4,7 @@
   <subtitle><![CDATA[6年+的互联网开发经验]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.zhuxiaowu.com/"/>
-  <updated>2016-06-21T10:40:44.000Z</updated>
+  <updated>2016-06-21T11:33:22.000Z</updated>
   <id>http://blog.zhuxiaowu.com/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://blog.zhuxiaowu.com/2016/06/21/html5-camera-barcode-scan-1d-2d/"/>
     <id>http://blog.zhuxiaowu.com/2016/06/21/html5-camera-barcode-scan-1d-2d/</id>
     <published>2016-06-21T05:17:33.000Z</published>
-    <updated>2016-06-21T10:40:44.000Z</updated>
+    <updated>2016-06-21T11:33:22.000Z</updated>
     <content type="html"><![CDATA[<p>最近做管理项目，需要扫码，之后再做后续操作，像超市一样。本想着买个扫码枪，jd一看这个贵呀。。操作还麻烦，web管理系统，还得绑定keydown之类的乱七八糟，算了。</p>
 <p>由于知道高版本浏览器支持拍照，添加上扫码应该不麻烦，就一通Google。下面看看例子吧</p>
 <p>目前觉得最好用的1d解码应该是这个</p>
@@ -44,7 +44,7 @@ undefined:1 Uncaught (in promise) DOMException: Failed to load because no suppor
 <p>演示效果</p>
 <p><video id="video" style="width:300px;"></video></p>
 <p><canvas id="barcode-canvas" style="display:none;"></canvas></p>
-<script src="/uploads/barcode2d.min.js"></script>
+<script src="/javascripts/barcode2d.min.js"></script>
 
 <script>
     var video = document.getElementById('video');
@@ -57,7 +57,7 @@ undefined:1 Uncaught (in promise) DOMException: Failed to load because no suppor
         doDecode = false;
         console.log(result);
     }
-    DecoderWorker = new Worker("/uploads/barcode1d.min.js");
+    DecoderWorker = new Worker("/javascripts/barcode1d.min.js");
     DecoderWorker.onmessage = function(result){
         // 解析相同, 还要排错是不是ID
         if(result.data.success == "localization") {

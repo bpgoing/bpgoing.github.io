@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=5.0.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="angular,sails," />
+  <meta name="keywords" content="ruby, rails, sails" />
 
 
 
@@ -59,20 +59,28 @@
 
 
 
-<meta name="description" content="说学习sails好久了, 之所以想学它, 只是因为原来做rails时被它各种蹩脚玩意给折腾的。
-有些人很喜欢rails, 开始我也很喜欢, 各种库, 各种支持, 加上优雅的语法。熟悉后就各种烦各种不想用, 这货真是啥玩意都往里加, 啥新东西都想支持, 不再像它刚开始时的那么纯粹, 简便。 啥时候rails的组件能像sails那样醒目, 库能像glup提倡的那样: 每个插件只完成一个功能就好了, 别">
+<meta name="description" content="最近做管理项目，需要扫码，之后再做后续操作，像超市一样。本想着买个扫码枪，jd一看这个贵呀。。操作还麻烦，web管理系统，还得绑定keydown之类的乱七八糟，还是算了。
+由于知道高版本浏览器支持拍照，那么应该添加上扫码不麻烦，就一通Google。下面看看例子吧
+目前觉得最好最好用的1d解码最好的应该是这个
+https://github.com/EddieLa/JOB 记得gh-pages分支
+最">
 <meta property="og:type" content="article">
-<meta property="og:title" content="一个简单的项目架构">
-<meta property="og:url" content="http://blog.zhuxiaowu.com/2015/05/01/a-simple-system-architecture/index.html">
+<meta property="og:title" content="html5配合摄像头实现扫码">
+<meta property="og:url" content="http://blog.zhuxiaowu.com/2016/06/21/html5-camera-barcode-scan-1d-2d/index.html">
 <meta property="og:site_name" content="bpgoing的博客">
-<meta property="og:description" content="说学习sails好久了, 之所以想学它, 只是因为原来做rails时被它各种蹩脚玩意给折腾的。
-有些人很喜欢rails, 开始我也很喜欢, 各种库, 各种支持, 加上优雅的语法。熟悉后就各种烦各种不想用, 这货真是啥玩意都往里加, 啥新东西都想支持, 不再像它刚开始时的那么纯粹, 简便。 啥时候rails的组件能像sails那样醒目, 库能像glup提倡的那样: 每个插件只完成一个功能就好了, 别">
-<meta property="og:image" content="http://blog.zhuxiaowu.com/uploads/tsdsysglxt.png">
-<meta property="og:updated_time" content="2016-05-28T09:11:01.000Z">
+<meta property="og:description" content="最近做管理项目，需要扫码，之后再做后续操作，像超市一样。本想着买个扫码枪，jd一看这个贵呀。。操作还麻烦，web管理系统，还得绑定keydown之类的乱七八糟，还是算了。
+由于知道高版本浏览器支持拍照，那么应该添加上扫码不麻烦，就一通Google。下面看看例子吧
+目前觉得最好最好用的1d解码最好的应该是这个
+https://github.com/EddieLa/JOB 记得gh-pages分支
+最">
+<meta property="og:updated_time" content="2016-06-21T05:41:37.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="一个简单的项目架构">
-<meta name="twitter:description" content="说学习sails好久了, 之所以想学它, 只是因为原来做rails时被它各种蹩脚玩意给折腾的。
-有些人很喜欢rails, 开始我也很喜欢, 各种库, 各种支持, 加上优雅的语法。熟悉后就各种烦各种不想用, 这货真是啥玩意都往里加, 啥新东西都想支持, 不再像它刚开始时的那么纯粹, 简便。 啥时候rails的组件能像sails那样醒目, 库能像glup提倡的那样: 每个插件只完成一个功能就好了, 别">
+<meta name="twitter:title" content="html5配合摄像头实现扫码">
+<meta name="twitter:description" content="最近做管理项目，需要扫码，之后再做后续操作，像超市一样。本想着买个扫码枪，jd一看这个贵呀。。操作还麻烦，web管理系统，还得绑定keydown之类的乱七八糟，还是算了。
+由于知道高版本浏览器支持拍照，那么应该添加上扫码不麻烦，就一通Google。下面看看例子吧
+目前觉得最好最好用的1d解码最好的应该是这个
+https://github.com/EddieLa/JOB 记得gh-pages分支
+最">
 
 
 
@@ -90,7 +98,7 @@
   };
 </script>
 
-  <title> 一个简单的项目架构 | bpgoing的博客 </title>
+  <title> html5配合摄像头实现扫码 | bpgoing的博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -266,7 +274,7 @@
             
             
               
-                一个简单的项目架构
+                html5配合摄像头实现扫码
               
             
           </h1>
@@ -278,38 +286,19 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-05-01T19:38:17+08:00" content="2015-05-01">
-              2015-05-01
+            <time itemprop="dateCreated" datetime="2016-06-21T13:17:33+08:00" content="2016-06-21">
+              2016-06-21
             </time>
           </span>
 
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/language/" itemprop="url" rel="index">
-                    <span itemprop="name">language</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
           
 
           
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/05/01/a-simple-system-architecture/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/05/01/a-simple-system-architecture/" itemprop="commentsCount"></span>
+                <a href="/2016/06/21/html5-camera-barcode-scan-1d-2d/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/21/html5-camera-barcode-scan-1d-2d/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -330,45 +319,45 @@
       
 
       
-        <p>说学习sails好久了, 之所以想学它, 只是因为原来做rails时被它各种蹩脚玩意给折腾的。</p>
-<p>有些人很喜欢rails, 开始我也很喜欢, 各种库, 各种支持, 加上优雅的语法。熟悉后就各种烦各种不想用, 这货真是啥玩意都往里加, 啥新东西都想支持, 不再像它刚开始时的那么纯粹, 简便。 啥时候rails的组件能像sails那样醒目, 库能像glup提倡的那样: 每个插件只完成一个功能就好了, 别做万能的Rambo好不！！！</p>
-<p>额， 这仅限于4.x及以前版本, 好久没用过了是不是有了变化不知道, 希望能变轻点吧。</p>
-<p>说回正题, 最近有个基于web的实验室管理系统项目, 想了想系统的复杂性, 还有管理系统的使用习惯, 准备使用以下架构</p>
-<p>关于b/s的管理系统, 可以参考<a href="https://github.com/xufei/blog/blob/master/posts/2014-04-27-%E5%9F%BA%E4%BA%8EAngularJS%E7%9A%84%E4%BC%81%E4%B8%9A%E8%BD%AF%E4%BB%B6%E5%89%8D%E7%AB%AF%E6%9E%B6%E6%9E%84.md" target="_blank" rel="external">这篇文章</a>看看</p>
-<p>看完文章就该说说架构了, 以前总觉得架构高大上, 现在看也就这样, 适合项目就最好。</p>
-<p>前端: bootstrap+angular+jquery+socket.io+gulp</p>
-<p>后端: node+sails+mysql(mongodb), 因为没啥访问速度要求, 把默认依赖redis的组件改成mysql(真是没一个框架是满意的)</p>
-<p>装上sails后看了看，这货也不是很满意, 库的依赖是grunt管理的, 这个先不管吧。 但是自己又封装了socket.io, 人家已经写这么好了, 你居然又画蛇添足。。悲催！！ 依赖的ejs模板引擎还好, 去掉也方便。再具体的还没看，慢慢完善吧，总比rails好些, 项目结构清晰, 业务复杂后也不是把所有功能集中在model, 还支持websocket。</p>
-<p>先想好页面布局, 大概是这样子的, 项目管理系统嘛, 单页面项目没有刷新最实用, angular+angular-ui-router配合简直了(当然还有像<a href="http://cn.vuejs.org/" target="_blank" rel="external">vue.js</a>也不错)。 还有<a href="https://github.com/xufei/ng-control/issues/2" target="_blank" rel="external">这篇文章</a>可参考。</p>
-<p>关于angular-ui-router可以单独写篇文章介绍</p>
-<p><img src="/uploads/tsdsysglxt.png" alt="页面基本布局"></p>
-<p>后续再补</p>
+        <p>最近做管理项目，需要扫码，之后再做后续操作，像超市一样。本想着买个扫码枪，jd一看这个贵呀。。操作还麻烦，web管理系统，还得绑定keydown之类的乱七八糟，还是算了。</p>
+<p>由于知道高版本浏览器支持拍照，那么应该添加上扫码不麻烦，就一通Google。下面看看例子吧</p>
+<p>目前觉得最好最好用的1d解码最好的应该是这个</p>
+<p><a href="https://github.com/EddieLa/JOB" target="_blank" rel="external">https://github.com/EddieLa/JOB</a> 记得gh-pages分支</p>
+<p>最好用的2d解码是这个</p>
+<p><a href="https://github.com/LazarSoft/jsqrcode" target="_blank" rel="external">https://github.com/LazarSoft/jsqrcode</a> 还好在线例子能运行起来</p>
+<p>不用支持上传图片扫码,那就把没用的代码删掉得了。</p>
+<p>还遇到了问题，angular下开启视频居然有报错</p>
+<pre><code>Refused to load media from &apos;blob:http%3A//localhost%3A3000/0fde46b7-3913-47e3-8941-1a85a6ab99c8&apos; because it violates the following Content Security Policy directive: &quot;default-src *&quot;. Note that &apos;media-src&apos; was not explicitly set, so &apos;default-src&apos; is used as a fallback.
+
+undefined:1 Uncaught (in promise) DOMException: Failed to load because no supported source was found.
+</code></pre><p>感觉像angular地址栏URL的事情。blob地址是/，但URL是/#/xxxx/xxx。</p>
+<p>看看这俩</p>
+<p><a href="https://github.com/meteor/meteor/tree/devel/packages/browser-policy" target="_blank" rel="external">https://github.com/meteor/meteor/tree/devel/packages/browser-policy</a></p>
+<p><a href="https://github.com/meteor/mobile-packages/issues/80" target="_blank" rel="external">https://github.com/meteor/mobile-packages/issues/80</a></p>
+<p>还有这俩, 哥用的第一个最简单的，不喜欢太复杂，坑爹。</p>
+<p><a href="https://github.com/jonashartmann/webcam-directive" target="_blank" rel="external">https://github.com/jonashartmann/webcam-directive</a></p>
+<p><a href="https://github.com/onemightyroar/angular-camera" target="_blank" rel="external">https://github.com/onemightyroar/angular-camera</a></p>
+<p><a href="https://github.com/bcabanes/ng-camera" target="_blank" rel="external">https://github.com/bcabanes/ng-camera</a></p>
+<p>等两天放上例子, 在页面直接可以扫码</p>
+<p>有任何问题请留言。</p>
 
       
     </div>
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/angular/" rel="tag">#angular</a>
-          
-            <a href="/tags/sails/" rel="tag">#sails</a>
-          
-        </div>
-      
 
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2016/05/28/angular-ui-router-simple-learn/" rel="next" title="angular-ui-router 嵌套路由">
+                <i class="fa fa-chevron-left"></i> angular-ui-router 嵌套路由
+              </a>
+            
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/02/12/ionic-angularjs-cordova-env-development/" rel="prev" title="Ionic+Angularjs+PhoneGap开发环境搭建">
-                Ionic+Angularjs+PhoneGap开发环境搭建 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -394,8 +383,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2015/05/01/a-simple-system-architecture/"
-           data-title="一个简单的项目架构" data-url="http://blog.zhuxiaowu.com/2015/05/01/a-simple-system-architecture/">
+      <div class="ds-thread" data-thread-key="2016/06/21/html5-camera-barcode-scan-1d-2d/"
+           data-title="html5配合摄像头实现扫码" data-url="http://blog.zhuxiaowu.com/2016/06/21/html5-camera-barcode-scan-1d-2d/">
       </div>
     
   </div>

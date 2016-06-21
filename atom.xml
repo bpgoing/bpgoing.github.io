@@ -4,7 +4,7 @@
   <subtitle><![CDATA[6年+的互联网开发经验]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.zhuxiaowu.com/"/>
-  <updated>2016-06-21T05:46:34.000Z</updated>
+  <updated>2016-06-21T09:29:12.000Z</updated>
   <id>http://blog.zhuxiaowu.com/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://blog.zhuxiaowu.com/2016/06/21/html5-camera-barcode-scan-1d-2d/"/>
     <id>http://blog.zhuxiaowu.com/2016/06/21/html5-camera-barcode-scan-1d-2d/</id>
     <published>2016-06-21T05:17:33.000Z</published>
-    <updated>2016-06-21T05:46:34.000Z</updated>
+    <updated>2016-06-21T09:29:12.000Z</updated>
     <content type="html"><![CDATA[<p>最近做管理项目，需要扫码，之后再做后续操作，像超市一样。本想着买个扫码枪，jd一看这个贵呀。。操作还麻烦，web管理系统，还得绑定keydown之类的乱七八糟，算了。</p>
 <p>由于知道高版本浏览器支持拍照，添加上扫码应该不麻烦，就一通Google。下面看看例子吧</p>
 <p>目前觉得最好用的1d解码应该是这个</p>
@@ -41,7 +41,70 @@ undefined:1 Uncaught (in promise) DOMException: Failed to load because no suppor
 <p><a href="https://github.com/bcabanes/ng-camera" target="_blank" rel="external">https://github.com/bcabanes/ng-camera</a></p>
 <p>等两天放上例子, 在页面直接可以扫码</p>
 <p>有任何问题请留言。</p>
-]]></content>
+<p>演示效果</p>
+<p><video id="video" style="width:300px;"></video></p>
+<p><canvas id="barcode-canvas" style="display:none;"></canvas></p>
+<script src="/uploads/barcode2d.min.js"></script>
+
+<script>
+    var video = document.getElementById('video');
+    var canvas = document.getElementById('barcode-canvas');
+    canvas.width = 640;
+    canvas.height = 480;
+    context = canvas.getContext("2d");
+    var doDecode = true;
+    function success2D(result){
+        doDecode = false;
+        console.log(result);
+    }
+    DecoderWorker = new Worker("/uploads/barcode1d.min.js");
+    DecoderWorker.onmessage = function(result){
+        // 解析相同, 还要排错是不是ID
+        if(result.data.success == "localization") {
+            return;
+        }
+        if(result.data.success != 'localization' && result.data.result.length > 0){
+            doDecode = false;
+            console.log(result.data.result);
+        }
+    };
+    // 解码
+    var barcodeScan = function(){
+        if(doDecode){
+            try{
+                context.drawImage(video, 0, 0, canvas.width, canvas.height);
+                qrcode.width = canvas.width;
+                qrcode.height = canvas.height;
+                qrcode.imagedata = context.getImageData(0, 0, canvas.width, canvas.height);
+                try{
+                    DecoderWorker.postMessage({ // 解析一维码
+                        scan : context.getImageData(0, 0, canvas.width, canvas.height).data,
+                        scanWidth : canvas.width,
+                        scanHeight : canvas.height,
+                        multiple : true,
+                        decodeFormats : ["Code128","Code93","Code39","EAN-13", "2Of5", "Inter2Of5", "Codabar"],
+                        cmd : "normal",
+                        rotation : 1,
+                    });
+                    success2D(qrcode.process(context));// 解析二维码
+                } catch(e){}
+            } catch(e){}
+        }
+    }
+
+    navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
+    if (navigator.getUserMedia) {
+        navigator.getUserMedia({video: true, audio: false}, function(stream) {
+            video.src = window.URL.createObjectURL(stream);
+            video.play();
+            setInterval(barcodeScan, 500);
+        }, function(error) {
+            console.log("打开视频错误: " + error);
+        });
+    } else {
+        console.log("不支持打开视频, 请联系管理员");
+    }
+</script>]]></content>
     <summary type="html">
     <![CDATA[<p>最近做管理项目，需要扫码，之后再做后续操作，像超市一样。本想着买个扫码枪，jd一看这个贵呀。。操作还麻烦，web管理系统，还得绑定keydown之类的乱七八糟，算了。</p>
 <p>由于知道高版本浏览器支持拍照，添加上扫码应该不麻烦，就一通Google。下面看看例子吧</p]]>

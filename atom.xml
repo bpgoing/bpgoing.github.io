@@ -4,7 +4,7 @@
   <subtitle><![CDATA[6年+的互联网开发经验]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.zhuxiaowu.com/"/>
-  <updated>2016-06-21T12:07:22.000Z</updated>
+  <updated>2016-06-26T08:16:47.000Z</updated>
   <id>http://blog.zhuxiaowu.com/</id>
   
   <author>
@@ -13,6 +13,191 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[使用js-xlsx处理excel]]></title>
+    <link href="http://blog.zhuxiaowu.com/2016/06/26/xlsx-excel-basic/"/>
+    <id>http://blog.zhuxiaowu.com/2016/06/26/xlsx-excel-basic/</id>
+    <published>2016-06-26T01:33:04.000Z</published>
+    <updated>2016-06-26T08:16:47.000Z</updated>
+    <content type="html"><![CDATA[<p>最近遇到需求, 完整导入导出excel, 于是又一通Google。<br>发现了以下玩意</p>
+<p>前端解析excel/nodejs也可以 <a href="https://github.com/SheetJS/js-xlsx" target="_blank" rel="external">https://github.com/SheetJS/js-xlsx</a></p>
+<p>前端呈现excel样式,不过Jquery的 <a href="https://handsontable.com" target="_blank" rel="external">https://handsontable.com</a></p>
+<p>如果有angular的就好了，想着ui-grid的可以, 但需要做的工作太多, 时间紧任务重, 还是拿现成的吧(不是我的风格)</p>
+<h3 id="xlsx_u5165_u95E8"><a href="#xlsx_u5165_u95E8" class="headerlink" title="xlsx入门"></a>xlsx入门</h3><p>xlsx支持以下格式读取</p>
+<ul>
+<li>Excel 2007+ XML Formats (XLSX/XLSM)</li>
+<li>Excel 2007+ Binary Format (XLSB)</li>
+<li>Excel 2003-2004 XML Format (XML “SpreadsheetML”)</li>
+<li>Excel 97-2004 (XLS BIFF8)</li>
+<li>Excel 5.0/95 (XLS BIFF5)</li>
+<li>OpenDocument Spreadsheet (ODS)</li>
+</ul>
+<p>支持写入文件的格式</p>
+<ul>
+<li>XLSX</li>
+<li>CSV (and general DSV)</li>
+<li>JSON and JS objects (various styles)</li>
+</ul>
+<h3 id="u5B89_u88C5"><a href="#u5B89_u88C5" class="headerlink" title="安装"></a>安装</h3><p>npm安装</p>
+<pre><code>npm install xlsx
+</code></pre><p>浏览器引入</p>
+<pre><code>&lt;script lang=&quot;javascript&quot; src=&quot;dist/xlsx.core.min.js&quot;&gt;&lt;/script&gt;
+</code></pre><p>bower安装</p>
+<pre><code>bower install js-xlsx
+</code></pre><h3 id="u53EF_u9009_u6A21_u5757"><a href="#u53EF_u9009_u6A21_u5757" class="headerlink" title="可选模块"></a>可选模块</h3><p>node版本自动加载依赖。<br>有些模块过大，却在特定场景使用，所以没放进核心库中。为了浏览器能够使用必须引入</p>
+<pre><code>&lt;!-- international support from https://github.com/sheetjs/js-codepage --&gt;
+&lt;script src=&quot;dist/cpexcel.js&quot;&gt;&lt;/script&gt;
+&lt;!-- ODS support --&gt;
+&lt;script src=&quot;dist/ods.js&quot;&gt;&lt;/script&gt;
+</code></pre><p>dist目录下生成好了压缩版本<br>包含全部功能的单文件版本dist/xlsx.full.min.js</p>
+<h3 id="u4F4E_u7248_u672Cjs_u6807_u51C6_u517C_u5BB9_u6027"><a href="#u4F4E_u7248_u672Cjs_u6807_u51C6_u517C_u5BB9_u6027" class="headerlink" title="低版本js标准兼容性"></a>低版本js标准兼容性</h3><p>xlxs.js使用的ES5标准, 低版本的浏览器需要<a href="http://git.io/QVh77g" target="_blank" rel="external">Polyfills</a>支持。引入<a href="https://github.com/SheetJS/js-xlsx/blob/master/shim.js" target="_blank" rel="external">shim</a>即可</p>
+<pre><code>&lt;script type=&quot;text/javascript&quot; src=&quot;/path/to/shim.js&quot;&gt;&lt;/script&gt;
+</code></pre><p>要在xlxs之前加载</p>
+<h3 id="u89E3_u6790Workbooks"><a href="#u89E3_u6790Workbooks" class="headerlink" title="解析Workbooks"></a>解析Workbooks</h3><p>一些概念</p>
+<pre><code>workbook   指整个excel, 读取excel文件得到的对象
+worksheet  指excel中的一个表, 一个excel至少一张表
+cell       指单元格
+</code></pre><p>node读取</p>
+<pre><code>XLSX = require(&apos;xlsx&apos;);
+var workbook = XLSX.readFile(&apos;test.xlsx&apos;);
+</code></pre><p>ajax读取，兼容低版本的请看<a href="http://oss.sheetjs.com/js-xlsx/ajax.html" target="_blank" rel="external">http://oss.sheetjs.com/js-xlsx/ajax.html</a></p>
+<pre><code>/* set up XMLHttpRequest */
+var url = &quot;test_files/formula_stress_test_ajax.xlsx&quot;;
+var oReq = new XMLHttpRequest();
+oReq.open(&quot;GET&quot;, url, true);
+oReq.responseType = &quot;arraybuffer&quot;;
+
+oReq.onload = function(e) {
+    var arraybuffer = oReq.response;
+
+    /* convert data to binary string */
+    var data = new Uint8Array(arraybuffer);
+    var arr = new Array();
+    for(var i = 0; i != data.length; ++i) arr[i] = String.fromCharCode(data[i]);
+    var bstr = arr.join(&quot;&quot;);
+
+    /* Call XLSX */
+    var workbook = XLSX.read(bstr, {type:&quot;binary&quot;});
+
+    /* DO SOMETHING WITH workbook HERE */
+}
+oReq.send();
+</code></pre><p>HTML5拖拽，使用readAsBinaryString读取</p>
+<pre><code>/* set up drag-and-drop event */
+function handleDrop(e) {
+    e.stopPropagation();
+    e.preventDefault();
+    var files = e.dataTransfer.files;
+    var i,f;
+    for (i = 0, f = files[i]; i != files.length; ++i) {
+        var reader = new FileReader();
+        var name = f.name;
+        reader.onload = function(e) {
+            var data = e.target.result;
+
+            /* if binary string, read with type &apos;binary&apos; */
+            var workbook = XLSX.read(data, {type: &apos;binary&apos;});
+
+            /* DO SOMETHING WITH workbook HERE */
+        };
+        reader.readAsBinaryString(f);
+    }
+}
+drop_dom_element.addEventListener(&apos;drop&apos;, handleDrop, false);
+</code></pre><p>HTML5 输入框使用readAsBinaryString读取</p>
+<pre><code>function handleFile(e) {
+    var files = e.target.files;
+    var i,f;
+    for (i = 0, f = files[i]; i != files.length; ++i) {
+        var reader = new FileReader();
+        var name = f.name;
+        reader.onload = function(e) {
+            var data = e.target.result;
+
+            var workbook = XLSX.read(data, {type: &apos;binary&apos;});
+
+            /* DO SOMETHING WITH workbook HERE */
+        };
+        reader.readAsBinaryString(f);
+    }
+}
+input_dom_element.addEventListener(&apos;change&apos;, handleFile, false);
+</code></pre><p>真累…<br>记些要点</p>
+<p>###接口</p>
+<pre><code>XLSX.utils.encode_row(0)                             -&gt; &apos;1&apos;
+XLSX.utils.decode_row(&apos;1&apos;)                           -&gt; 0
+XLSX.utils.encode_col(4)                             -&gt; &apos;E&apos;
+XLSX.utils.decode_col(&apos;E&apos;)                           -&gt; 4
+XLSX.utils.encode_cell({c:0,r:2})                    -&gt; &apos;A3&apos;
+XLSX.utils.decode_cell(&apos;C4&apos;)                         -&gt; { c: 2, r: 3 }
+XLSX.utils.encode_range({s:{c:0,r:1},e:{c:2,r:4}})   -&gt; &apos;A2:C5&apos;
+XLSX.utils.decode_range(&apos;A5:C6&apos;)                     -&gt; {s:{c:0,r:4},e:{c:2,r:5}}
+</code></pre><p>###Workbook / Worksheet / Cell 对象描述</p>
+<p>####一般结构<br>这样表示一个单元格地址 {c:C, r:R}, 大写C和R是0开始的索引值。B5单元格的表示方法就是{c:1, r:4} c就是列, r就是行。</p>
+<p>这样表示一个单元格范围 {s:S, e:E}, 范围里S是第一个单元格, E是最后一个单元格。像A3:B7对应就是{s:{c:0, r:2}, e:{c:1, r:6}}。这样就知道哪些单元格是合并的了</p>
+<p>单元格对象</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>v</code></td>
+<td>raw value (see Data Types section for more info)</td>
+</tr>
+<tr>
+<td><code>w</code></td>
+<td>格式化文本 (如果支持)</td>
+</tr>
+<tr>
+<td><code>t</code></td>
+<td>数据类型: <code>b</code> Boolean, <code>n</code> 数字, <code>e</code> 错误, <code>s</code> 字符串, <code>d</code> 日期</td>
+</tr>
+<tr>
+<td><code>f</code></td>
+<td>公式 (如果支持)</td>
+</tr>
+<tr>
+<td><code>r</code></td>
+<td>富文本编码 (如果支持, node读出来似乎不支持, 乱码)</td>
+</tr>
+<tr>
+<td><code>h</code></td>
+<td>HTML 渲染的富文本 (如果支持)</td>
+</tr>
+<tr>
+<td><code>c</code></td>
+<td>comments associated with the cell ** 没见过</td>
+</tr>
+<tr>
+<td><code>z</code></td>
+<td>number format string associated with the cell (if requested)</td>
+</tr>
+<tr>
+<td><code>l</code></td>
+<td>单元格的链接地址 (.Target holds link, .tooltip is tooltip)</td>
+</tr>
+<tr>
+<td><code>s</code></td>
+<td>the style/theme of the cell (if applicable)单元格样式(支持有限)</td>
+</tr>
+</tbody>
+</table>
+<p>###Worksheet Object<br>这些特殊字段都以!开头</p>
+<p>!ref 表格的范围</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>最近遇到需求, 完整导入导出excel, 于是又一通Google。<br>发现了以下玩意</p>
+<p>前端解析excel/nodejs也可以 <a href="https://github.com/SheetJS/js-xlsx" target="_blank" rel=]]>
+    </summary>
+    
+      <category term="js-xlxs" scheme="http://blog.zhuxiaowu.com/tags/js-xlxs/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[html5配合摄像头实现扫码]]></title>

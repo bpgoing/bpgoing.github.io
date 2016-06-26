@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=5.0.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="App Camera," />
+  <meta name="keywords" content="js-xlxs," />
 
 
 
@@ -59,31 +59,25 @@
 
 
 
-<meta name="description" content="前两天把开发环境搭建好了，但是Cordova是基于浏览器内核来渲染UI的(不知道这么说对不对，具体啥样也没去细弄)，不管基不基于浏览器，基于App的功能设计总得有些需要解决的问题，下面列一列，一个一个去解决。
-1 首先是授权登陆，服务端已经写好了rest api，授权是基于token认证的
-2 第三方授权登陆
-3 分享功能, 起码能分享到微信，微博，QQ吧。还在找插件中，没试。
-4 Android">
+<meta name="description" content="最近遇到需求, 完整导入导出excel, 于是又一通Google。发现了以下玩意
+前端解析excel/nodejs也可以 https://github.com/SheetJS/js-xlsx
+前端呈现excel样式,不过Jquery的 https://handsontable.com
+如果有angular的就好了，想着ui-grid的可以, 但需要做的工作太多, 时间紧任务重, 还是拿现成的吧(不">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Ionic Hybrid App调用Camera+读取相册照片">
-<meta property="og:url" content="http://blog.zhuxiaowu.com/2016/02/19/ionic-angularjs-cordova-camera-development/index.html">
+<meta property="og:title" content="使用js-xlsx处理excel">
+<meta property="og:url" content="http://blog.zhuxiaowu.com/2016/06/26/xlsx-excel-basic/index.html">
 <meta property="og:site_name" content="bpgoing的博客">
-<meta property="og:description" content="前两天把开发环境搭建好了，但是Cordova是基于浏览器内核来渲染UI的(不知道这么说对不对，具体啥样也没去细弄)，不管基不基于浏览器，基于App的功能设计总得有些需要解决的问题，下面列一列，一个一个去解决。
-1 首先是授权登陆，服务端已经写好了rest api，授权是基于token认证的
-2 第三方授权登陆
-3 分享功能, 起码能分享到微信，微博，QQ吧。还在找插件中，没试。
-4 Android">
-<meta property="og:image" content="http://blog.zhuxiaowu.com/uploads/camera-demo.png">
-<meta property="og:image" content="http://blog.zhuxiaowu.com/uploads/include-ng-cordova.png">
-<meta property="og:image" content="http://blog.zhuxiaowu.com/uploads/camera-xiaoguo.png">
-<meta property="og:updated_time" content="2016-02-24T11:47:09.000Z">
+<meta property="og:description" content="最近遇到需求, 完整导入导出excel, 于是又一通Google。发现了以下玩意
+前端解析excel/nodejs也可以 https://github.com/SheetJS/js-xlsx
+前端呈现excel样式,不过Jquery的 https://handsontable.com
+如果有angular的就好了，想着ui-grid的可以, 但需要做的工作太多, 时间紧任务重, 还是拿现成的吧(不">
+<meta property="og:updated_time" content="2016-06-26T08:16:47.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Ionic Hybrid App调用Camera+读取相册照片">
-<meta name="twitter:description" content="前两天把开发环境搭建好了，但是Cordova是基于浏览器内核来渲染UI的(不知道这么说对不对，具体啥样也没去细弄)，不管基不基于浏览器，基于App的功能设计总得有些需要解决的问题，下面列一列，一个一个去解决。
-1 首先是授权登陆，服务端已经写好了rest api，授权是基于token认证的
-2 第三方授权登陆
-3 分享功能, 起码能分享到微信，微博，QQ吧。还在找插件中，没试。
-4 Android">
+<meta name="twitter:title" content="使用js-xlsx处理excel">
+<meta name="twitter:description" content="最近遇到需求, 完整导入导出excel, 于是又一通Google。发现了以下玩意
+前端解析excel/nodejs也可以 https://github.com/SheetJS/js-xlsx
+前端呈现excel样式,不过Jquery的 https://handsontable.com
+如果有angular的就好了，想着ui-grid的可以, 但需要做的工作太多, 时间紧任务重, 还是拿现成的吧(不">
 
 
 
@@ -101,7 +95,7 @@
   };
 </script>
 
-  <title> Ionic Hybrid App调用Camera+读取相册照片 | bpgoing的博客 </title>
+  <title> 使用js-xlsx处理excel | bpgoing的博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -277,7 +271,7 @@
             
             
               
-                Ionic Hybrid App调用Camera+读取相册照片
+                使用js-xlsx处理excel
               
             
           </h1>
@@ -289,8 +283,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-02-19T20:56:37+08:00" content="2016-02-19">
-              2016-02-19
+            <time itemprop="dateCreated" datetime="2016-06-26T09:33:04+08:00" content="2016-06-26">
+              2016-06-26
             </time>
           </span>
 
@@ -300,8 +294,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/02/19/ionic-angularjs-cordova-camera-development/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/02/19/ionic-angularjs-cordova-camera-development/" itemprop="commentsCount"></span>
+                <a href="/2016/06/26/xlsx-excel-basic/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/26/xlsx-excel-basic/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -322,34 +316,175 @@
       
 
       
-        <p>前两天把开发环境搭建好了，但是Cordova是基于浏览器内核来渲染UI的(不知道这么说对不对，具体啥样也没去细弄)，不管基不基于浏览器，基于App的功能设计总得有些需要解决的问题，下面列一列，一个一个去解决。</p>
-<p>1 首先是授权登陆，服务端已经写好了rest api，授权是基于token认证的</p>
-<p>2 第三方授权登陆</p>
-<p>3 分享功能, 起码能分享到微信，微博，QQ吧。还在找插件中，没试。</p>
-<p>4 Android检查版本更新，自动检查</p>
-<p>5 拍照，选取照片，上传服务器</p>
-<p>先开始解决Camera 相册 上传滴问题吧，相机效果怎么着也要像这样吧？</p>
-<p><img src="/uploads/camera-demo.png" alt="demo"></p>
-<p>第一创建个cameraDemo项目</p>
-<pre><code>ionic start cameraDemo tabs
-</code></pre><p>安装3个插件</p>
-<pre><code>cordova plugin add cordova-plugin-camera # 调用相机的
-cordova plugin add https://github.com/wymsee/cordova-imagePicker.git # 打开相册的
-cordova plugin add cordova-plugin-file-transfer # 文件上传的
-</code></pre><p>之后到<a href="http://ngcordova.com/" target="_blank" rel="external">http://ngcordova.com/</a>这里下载ngcordova, 解压后把dist目录的ng-cordova.js 或者 ng-cordova.min.js 拷贝到项目的www/js目录。这是官方安装教程<a href="http://ngcordova.com/docs/install/" target="_blank" rel="external">http://ngcordova.com/docs/install/</a></p>
-<p>接着在index.html里引用</p>
-<pre><code>&lt;script src=&quot;lib/ngCordova/dist/ng-cordova.js&quot;&gt;&lt;/script&gt; # 这是新添加，在cordova.js之前
-&lt;script src=&quot;cordova.js&quot;&gt;&lt;/script&gt;
-</code></pre><p>修改www/js/app.js 引入ngCordova模块</p>
-<p><img src="/uploads/include-ng-cordova.png" alt="demo"></p>
-<p>剩下的代码就不写了，看这里有具体的例子</p>
-<p><a href="http://ngcordova.com/docs/plugins/camera/" target="_blank" rel="external">http://ngcordova.com/docs/plugins/camera/</a></p>
-<p><a href="http://ngcordova.com/docs/plugins/imagePicker/" target="_blank" rel="external">http://ngcordova.com/docs/plugins/imagePicker/</a></p>
-<p><a href="http://ngcordova.com/docs/plugins/fileTransfer/" target="_blank" rel="external">http://ngcordova.com/docs/plugins/fileTransfer/</a></p>
-<p>最终结果就是这样</p>
-<p><img src="/uploads/camera-xiaoguo.png" alt="demo"></p>
-<p>虽然跟文章开始时最终效果差了些，但咱们开局是好的，文章开始时的效果应该需要相机的二次开发，所以路还很长，要学习的还很多呀。</p>
-<p>不过网上看到了这个例子<a href="https://davidwalsh.name/browser-camera" target="_blank" rel="external">https://davidwalsh.name/browser-camera</a>，应该可以用HTML5来定制相机界面，但是有很多局限性，像聚焦，前后摄像头，闪光灯开启关闭等等。。。我是没尝试，有愿意试的小伙伴希望给个反馈。。</p>
+        <p>最近遇到需求, 完整导入导出excel, 于是又一通Google。<br>发现了以下玩意</p>
+<p>前端解析excel/nodejs也可以 <a href="https://github.com/SheetJS/js-xlsx" target="_blank" rel="external">https://github.com/SheetJS/js-xlsx</a></p>
+<p>前端呈现excel样式,不过Jquery的 <a href="https://handsontable.com" target="_blank" rel="external">https://handsontable.com</a></p>
+<p>如果有angular的就好了，想着ui-grid的可以, 但需要做的工作太多, 时间紧任务重, 还是拿现成的吧(不是我的风格)</p>
+<h3 id="xlsx_u5165_u95E8"><a href="#xlsx_u5165_u95E8" class="headerlink" title="xlsx入门"></a>xlsx入门</h3><p>xlsx支持以下格式读取</p>
+<ul>
+<li>Excel 2007+ XML Formats (XLSX/XLSM)</li>
+<li>Excel 2007+ Binary Format (XLSB)</li>
+<li>Excel 2003-2004 XML Format (XML “SpreadsheetML”)</li>
+<li>Excel 97-2004 (XLS BIFF8)</li>
+<li>Excel 5.0/95 (XLS BIFF5)</li>
+<li>OpenDocument Spreadsheet (ODS)</li>
+</ul>
+<p>支持写入文件的格式</p>
+<ul>
+<li>XLSX</li>
+<li>CSV (and general DSV)</li>
+<li>JSON and JS objects (various styles)</li>
+</ul>
+<h3 id="u5B89_u88C5"><a href="#u5B89_u88C5" class="headerlink" title="安装"></a>安装</h3><p>npm安装</p>
+<pre><code>npm install xlsx
+</code></pre><p>浏览器引入</p>
+<pre><code>&lt;script lang=&quot;javascript&quot; src=&quot;dist/xlsx.core.min.js&quot;&gt;&lt;/script&gt;
+</code></pre><p>bower安装</p>
+<pre><code>bower install js-xlsx
+</code></pre><h3 id="u53EF_u9009_u6A21_u5757"><a href="#u53EF_u9009_u6A21_u5757" class="headerlink" title="可选模块"></a>可选模块</h3><p>node版本自动加载依赖。<br>有些模块过大，却在特定场景使用，所以没放进核心库中。为了浏览器能够使用必须引入</p>
+<pre><code>&lt;!-- international support from https://github.com/sheetjs/js-codepage --&gt;
+&lt;script src=&quot;dist/cpexcel.js&quot;&gt;&lt;/script&gt;
+&lt;!-- ODS support --&gt;
+&lt;script src=&quot;dist/ods.js&quot;&gt;&lt;/script&gt;
+</code></pre><p>dist目录下生成好了压缩版本<br>包含全部功能的单文件版本dist/xlsx.full.min.js</p>
+<h3 id="u4F4E_u7248_u672Cjs_u6807_u51C6_u517C_u5BB9_u6027"><a href="#u4F4E_u7248_u672Cjs_u6807_u51C6_u517C_u5BB9_u6027" class="headerlink" title="低版本js标准兼容性"></a>低版本js标准兼容性</h3><p>xlxs.js使用的ES5标准, 低版本的浏览器需要<a href="http://git.io/QVh77g" target="_blank" rel="external">Polyfills</a>支持。引入<a href="https://github.com/SheetJS/js-xlsx/blob/master/shim.js" target="_blank" rel="external">shim</a>即可</p>
+<pre><code>&lt;script type=&quot;text/javascript&quot; src=&quot;/path/to/shim.js&quot;&gt;&lt;/script&gt;
+</code></pre><p>要在xlxs之前加载</p>
+<h3 id="u89E3_u6790Workbooks"><a href="#u89E3_u6790Workbooks" class="headerlink" title="解析Workbooks"></a>解析Workbooks</h3><p>一些概念</p>
+<pre><code>workbook   指整个excel, 读取excel文件得到的对象
+worksheet  指excel中的一个表, 一个excel至少一张表
+cell       指单元格
+</code></pre><p>node读取</p>
+<pre><code>XLSX = require(&apos;xlsx&apos;);
+var workbook = XLSX.readFile(&apos;test.xlsx&apos;);
+</code></pre><p>ajax读取，兼容低版本的请看<a href="http://oss.sheetjs.com/js-xlsx/ajax.html" target="_blank" rel="external">http://oss.sheetjs.com/js-xlsx/ajax.html</a></p>
+<pre><code>/* set up XMLHttpRequest */
+var url = &quot;test_files/formula_stress_test_ajax.xlsx&quot;;
+var oReq = new XMLHttpRequest();
+oReq.open(&quot;GET&quot;, url, true);
+oReq.responseType = &quot;arraybuffer&quot;;
+
+oReq.onload = function(e) {
+    var arraybuffer = oReq.response;
+
+    /* convert data to binary string */
+    var data = new Uint8Array(arraybuffer);
+    var arr = new Array();
+    for(var i = 0; i != data.length; ++i) arr[i] = String.fromCharCode(data[i]);
+    var bstr = arr.join(&quot;&quot;);
+
+    /* Call XLSX */
+    var workbook = XLSX.read(bstr, {type:&quot;binary&quot;});
+
+    /* DO SOMETHING WITH workbook HERE */
+}
+oReq.send();
+</code></pre><p>HTML5拖拽，使用readAsBinaryString读取</p>
+<pre><code>/* set up drag-and-drop event */
+function handleDrop(e) {
+    e.stopPropagation();
+    e.preventDefault();
+    var files = e.dataTransfer.files;
+    var i,f;
+    for (i = 0, f = files[i]; i != files.length; ++i) {
+        var reader = new FileReader();
+        var name = f.name;
+        reader.onload = function(e) {
+            var data = e.target.result;
+
+            /* if binary string, read with type &apos;binary&apos; */
+            var workbook = XLSX.read(data, {type: &apos;binary&apos;});
+
+            /* DO SOMETHING WITH workbook HERE */
+        };
+        reader.readAsBinaryString(f);
+    }
+}
+drop_dom_element.addEventListener(&apos;drop&apos;, handleDrop, false);
+</code></pre><p>HTML5 输入框使用readAsBinaryString读取</p>
+<pre><code>function handleFile(e) {
+    var files = e.target.files;
+    var i,f;
+    for (i = 0, f = files[i]; i != files.length; ++i) {
+        var reader = new FileReader();
+        var name = f.name;
+        reader.onload = function(e) {
+            var data = e.target.result;
+
+            var workbook = XLSX.read(data, {type: &apos;binary&apos;});
+
+            /* DO SOMETHING WITH workbook HERE */
+        };
+        reader.readAsBinaryString(f);
+    }
+}
+input_dom_element.addEventListener(&apos;change&apos;, handleFile, false);
+</code></pre><p>真累…<br>记些要点</p>
+<p>###接口</p>
+<pre><code>XLSX.utils.encode_row(0)                             -&gt; &apos;1&apos;
+XLSX.utils.decode_row(&apos;1&apos;)                           -&gt; 0
+XLSX.utils.encode_col(4)                             -&gt; &apos;E&apos;
+XLSX.utils.decode_col(&apos;E&apos;)                           -&gt; 4
+XLSX.utils.encode_cell({c:0,r:2})                    -&gt; &apos;A3&apos;
+XLSX.utils.decode_cell(&apos;C4&apos;)                         -&gt; { c: 2, r: 3 }
+XLSX.utils.encode_range({s:{c:0,r:1},e:{c:2,r:4}})   -&gt; &apos;A2:C5&apos;
+XLSX.utils.decode_range(&apos;A5:C6&apos;)                     -&gt; {s:{c:0,r:4},e:{c:2,r:5}}
+</code></pre><p>###Workbook / Worksheet / Cell 对象描述</p>
+<p>####一般结构<br>这样表示一个单元格地址 {c:C, r:R}, 大写C和R是0开始的索引值。B5单元格的表示方法就是{c:1, r:4} c就是列, r就是行。</p>
+<p>这样表示一个单元格范围 {s:S, e:E}, 范围里S是第一个单元格, E是最后一个单元格。像A3:B7对应就是{s:{c:0, r:2}, e:{c:1, r:6}}。这样就知道哪些单元格是合并的了</p>
+<p>单元格对象</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>v</code></td>
+<td>raw value (see Data Types section for more info)</td>
+</tr>
+<tr>
+<td><code>w</code></td>
+<td>格式化文本 (如果支持)</td>
+</tr>
+<tr>
+<td><code>t</code></td>
+<td>数据类型: <code>b</code> Boolean, <code>n</code> 数字, <code>e</code> 错误, <code>s</code> 字符串, <code>d</code> 日期</td>
+</tr>
+<tr>
+<td><code>f</code></td>
+<td>公式 (如果支持)</td>
+</tr>
+<tr>
+<td><code>r</code></td>
+<td>富文本编码 (如果支持, node读出来似乎不支持, 乱码)</td>
+</tr>
+<tr>
+<td><code>h</code></td>
+<td>HTML 渲染的富文本 (如果支持)</td>
+</tr>
+<tr>
+<td><code>c</code></td>
+<td>comments associated with the cell ** 没见过</td>
+</tr>
+<tr>
+<td><code>z</code></td>
+<td>number format string associated with the cell (if requested)</td>
+</tr>
+<tr>
+<td><code>l</code></td>
+<td>单元格的链接地址 (.Target holds link, .tooltip is tooltip)</td>
+</tr>
+<tr>
+<td><code>s</code></td>
+<td>the style/theme of the cell (if applicable)单元格样式(支持有限)</td>
+</tr>
+</tbody>
+</table>
+<p>###Worksheet Object<br>这些特殊字段都以!开头</p>
+<p>!ref 表格的范围</p>
 
       
     </div>
@@ -358,7 +493,7 @@ cordova plugin add cordova-plugin-file-transfer # 文件上传的
       
         <div class="post-tags">
           
-            <a href="/tags/App-Camera/" rel="tag">#App Camera</a>
+            <a href="/tags/js-xlxs/" rel="tag">#js-xlxs</a>
           
         </div>
       
@@ -367,17 +502,13 @@ cordova plugin add cordova-plugin-file-transfer # 文件上传的
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/02/16/user-auth-angularjs-ionic/" rel="next" title="angularjs ionic实现用户认证">
-                <i class="fa fa-chevron-left"></i> angularjs ionic实现用户认证
+              <a href="/2016/06/21/html5-camera-barcode-scan-1d-2d/" rel="next" title="html5配合摄像头实现扫码">
+                <i class="fa fa-chevron-left"></i> html5配合摄像头实现扫码
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/03/19/ionic-image-picker/" rel="prev" title="ionic框架的一些图片扩展">
-                ionic框架的一些图片扩展 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -403,8 +534,8 @@ cordova plugin add cordova-plugin-file-transfer # 文件上传的
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/02/19/ionic-angularjs-cordova-camera-development/"
-           data-title="Ionic Hybrid App调用Camera+读取相册照片" data-url="http://blog.zhuxiaowu.com/2016/02/19/ionic-angularjs-cordova-camera-development/">
+      <div class="ds-thread" data-thread-key="2016/06/26/xlsx-excel-basic/"
+           data-title="使用js-xlsx处理excel" data-url="http://blog.zhuxiaowu.com/2016/06/26/xlsx-excel-basic/">
       </div>
     
   </div>
@@ -512,7 +643,7 @@ cordova plugin add cordova-plugin-file-transfer # 文件上传的
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#xlsx_u5165_u95E8"><span class="nav-number">1.</span> <span class="nav-text">xlsx入门</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u5B89_u88C5"><span class="nav-number">2.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u53EF_u9009_u6A21_u5757"><span class="nav-number">3.</span> <span class="nav-text">可选模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u4F4E_u7248_u672Cjs_u6807_u51C6_u517C_u5BB9_u6027"><span class="nav-number">4.</span> <span class="nav-text">低版本js标准兼容性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u89E3_u6790Workbooks"><span class="nav-number">5.</span> <span class="nav-text">解析Workbooks</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">

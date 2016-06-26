@@ -4,7 +4,7 @@
   <subtitle><![CDATA[6年+的互联网开发经验]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.zhuxiaowu.com/"/>
-  <updated>2016-06-26T08:16:47.000Z</updated>
+  <updated>2016-06-26T08:21:05.000Z</updated>
   <id>http://blog.zhuxiaowu.com/</id>
   
   <author>
@@ -19,8 +19,8 @@
     <link href="http://blog.zhuxiaowu.com/2016/06/26/xlsx-excel-basic/"/>
     <id>http://blog.zhuxiaowu.com/2016/06/26/xlsx-excel-basic/</id>
     <published>2016-06-26T01:33:04.000Z</published>
-    <updated>2016-06-26T08:16:47.000Z</updated>
-    <content type="html"><![CDATA[<p>最近遇到需求, 完整导入导出excel, 于是又一通Google。<br>发现了以下玩意</p>
+    <updated>2016-06-26T08:21:05.000Z</updated>
+    <content type="html"><![CDATA[<p>需求：完整导入导出excel, 于是又一通Google。<br>发现了以下玩意</p>
 <p>前端解析excel/nodejs也可以 <a href="https://github.com/SheetJS/js-xlsx" target="_blank" rel="external">https://github.com/SheetJS/js-xlsx</a></p>
 <p>前端呈现excel样式,不过Jquery的 <a href="https://handsontable.com" target="_blank" rel="external">https://handsontable.com</a></p>
 <p>如果有angular的就好了，想着ui-grid的可以, 但需要做的工作太多, 时间紧任务重, 还是拿现成的吧(不是我的风格)</p>
@@ -191,8 +191,8 @@ XLSX.utils.decode_range(&apos;A5:C6&apos;)                     -&gt; {s:{c:0,r:4
 <p>!ref 表格的范围</p>
 ]]></content>
     <summary type="html">
-    <![CDATA[<p>最近遇到需求, 完整导入导出excel, 于是又一通Google。<br>发现了以下玩意</p>
-<p>前端解析excel/nodejs也可以 <a href="https://github.com/SheetJS/js-xlsx" target="_blank" rel=]]>
+    <![CDATA[<p>需求：完整导入导出excel, 于是又一通Google。<br>发现了以下玩意</p>
+<p>前端解析excel/nodejs也可以 <a href="https://github.com/SheetJS/js-xlsx" target="_blank" rel="exte]]>
     </summary>
     
       <category term="js-xlxs" scheme="http://blog.zhuxiaowu.com/tags/js-xlxs/"/>
@@ -204,8 +204,8 @@ XLSX.utils.decode_range(&apos;A5:C6&apos;)                     -&gt; {s:{c:0,r:4
     <link href="http://blog.zhuxiaowu.com/2016/06/21/html5-camera-barcode-scan-1d-2d/"/>
     <id>http://blog.zhuxiaowu.com/2016/06/21/html5-camera-barcode-scan-1d-2d/</id>
     <published>2016-06-21T05:17:33.000Z</published>
-    <updated>2016-06-21T12:07:22.000Z</updated>
-    <content type="html"><![CDATA[<p>最近做管理项目，需要扫码，之后再做后续操作，像超市一样。本想着买个扫码枪，jd一看这个贵呀。。操作还麻烦，web管理系统，还得绑定keydown之类的乱七八糟，算了。</p>
+    <updated>2016-06-26T08:21:03.000Z</updated>
+    <content type="html"><![CDATA[<p>管理项目，需要扫码，像超市一样。本想着买个扫码枪，jd一看这个贵呀。。操作还麻烦，web管理系统，还得绑定keydown之类的乱七八糟，算了。</p>
 <p>由于知道高版本浏览器支持拍照，添加上扫码应该不麻烦，就一通Google。下面看看例子吧</p>
 <p>目前觉得最好用的1d解码应该是这个</p>
 <p><a href="https://github.com/EddieLa/JOB" target="_blank" rel="external">https://github.com/EddieLa/JOB</a> 记得gh-pages分支</p>
@@ -293,8 +293,9 @@ undefined:1 Uncaught (in promise) DOMException: Failed to load because no suppor
     }
 </script>]]></content>
     <summary type="html">
-    <![CDATA[<p>最近做管理项目，需要扫码，之后再做后续操作，像超市一样。本想着买个扫码枪，jd一看这个贵呀。。操作还麻烦，web管理系统，还得绑定keydown之类的乱七八糟，算了。</p>
-<p>由于知道高版本浏览器支持拍照，添加上扫码应该不麻烦，就一通Google。下面看看例子吧</p]]>
+    <![CDATA[<p>管理项目，需要扫码，像超市一样。本想着买个扫码枪，jd一看这个贵呀。。操作还麻烦，web管理系统，还得绑定keydown之类的乱七八糟，算了。</p>
+<p>由于知道高版本浏览器支持拍照，添加上扫码应该不麻烦，就一通Google。下面看看例子吧</p>
+<p>目前觉得最好用]]>
     </summary>
     
   </entry>

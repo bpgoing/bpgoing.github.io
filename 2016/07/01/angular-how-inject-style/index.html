@@ -60,18 +60,33 @@
 
 
 <meta name="description" content="声明一个controller有很多种写法都能运行成功, 那么各种方法的的却别是什么呢，下面咱们讲讲。
-###推断式注入    var testModule = angular.module(‘testModule’, []);    testModule.controller(‘testCtrl’, function($scope){        // xxx    });推断性注入是angul">
+###推断式注入
+var testModule = angular.module(&amp;apos;testModule&amp;apos;, []);
+testModule.controller(&amp;apos;testCtrl&amp;apos;, function($scope){
+    // xxx
+});
+推断">
 <meta property="og:type" content="article">
 <meta property="og:title" content="angular依赖注入">
 <meta property="og:url" content="http://blog.zhuxiaowu.com/2016/07/01/angular-how-inject-style/index.html">
 <meta property="og:site_name" content="bpgoing的博客">
 <meta property="og:description" content="声明一个controller有很多种写法都能运行成功, 那么各种方法的的却别是什么呢，下面咱们讲讲。
-###推断式注入    var testModule = angular.module(‘testModule’, []);    testModule.controller(‘testCtrl’, function($scope){        // xxx    });推断性注入是angul">
-<meta property="og:updated_time" content="2016-07-01T10:29:08.000Z">
+###推断式注入
+var testModule = angular.module(&amp;apos;testModule&amp;apos;, []);
+testModule.controller(&amp;apos;testCtrl&amp;apos;, function($scope){
+    // xxx
+});
+推断">
+<meta property="og:updated_time" content="2016-07-01T10:31:03.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="angular依赖注入">
 <meta name="twitter:description" content="声明一个controller有很多种写法都能运行成功, 那么各种方法的的却别是什么呢，下面咱们讲讲。
-###推断式注入    var testModule = angular.module(‘testModule’, []);    testModule.controller(‘testCtrl’, function($scope){        // xxx    });推断性注入是angul">
+###推断式注入
+var testModule = angular.module(&amp;apos;testModule&amp;apos;, []);
+testModule.controller(&amp;apos;testCtrl&amp;apos;, function($scope){
+    // xxx
+});
+推断">
 
 
 
@@ -311,11 +326,29 @@
 
       
         <p>声明一个controller有很多种写法都能运行成功, 那么各种方法的的却别是什么呢，下面咱们讲讲。</p>
-<p>###推断式注入<br>    var testModule = angular.module(‘testModule’, []);<br>    testModule.controller(‘testCtrl’, function($scope){<br>        // xxx<br>    });<br>推断性注入是angular根据你传入的参数(这里只有$scope)来给你自动注入。</p>
+<p>###推断式注入</p>
+<pre><code>var testModule = angular.module(&apos;testModule&apos;, []);
+testModule.controller(&apos;testCtrl&apos;, function($scope){
+    // xxx
+});
+</code></pre><p>推断性注入是angular根据你传入的参数(这里只有$scope)来给你自动注入。</p>
 <p>但是这样有个坏处, 就是如果你的代码发布的时候被压缩, $scope可能被压缩成a, 这样代码就会报错了。。</p>
 <p>所以这种方式不被推荐</p>
-<p>###声明式注入<br>    var testModule = angular.module(‘testModule’, []);<br>    var testCtrl = function($scope, rs){<br>        // 这里的rs其实就是$rootScope<br>    }<br>    testCtrl.$inject = [‘$scope’, ‘$rootScope’];<br>    testModule.controller(‘testCtrl’, testCtrl);<br>就要多写一行, 别的没啥影响, 觉得这样挺好的, 还有就是随便压缩代码。</p>
-<p>###内联式注入<br>    var testModule = angular.module(‘testModule’, []);<br>    testModule.controller(‘testCtrl’, [‘$scope’, ‘$rootScope’, function(scope, rs){<br>        // scope就是$scope, rs 就是rootScope<br>        // 当然依然可以起名叫$scope<br>    }]);<br>一样可以随便压缩代码</p>
+<p>###声明式注入</p>
+<pre><code>var testModule = angular.module(&apos;testModule&apos;, []);
+var testCtrl = function($scope, rs){
+    // 这里的rs其实就是$rootScope
+}
+testCtrl.$inject = [&apos;$scope&apos;, &apos;$rootScope&apos;];
+testModule.controller(&apos;testCtrl&apos;, testCtrl);
+</code></pre><p>就要多写一行, 别的没啥影响, 觉得这样挺好的, 还有就是随便压缩代码。</p>
+<p>###内联式注入</p>
+<pre><code>var testModule = angular.module(&apos;testModule&apos;, []);
+testModule.controller(&apos;testCtrl&apos;, [&apos;$scope&apos;, &apos;$rootScope&apos;, function(scope, rs){
+    // scope就是$scope, rs 就是rootScope
+    // 当然依然可以起名叫$scope
+}]);
+</code></pre><p>一样可以随便压缩代码</p>
 <p>今天才了解了这些玩意是个什么状态… 哈哈。 编写指令时一样</p>
 
       

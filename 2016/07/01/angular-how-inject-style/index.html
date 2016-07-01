@@ -77,7 +77,7 @@ testModule.controller(&amp;apos;testCtrl&amp;apos;, function($scope){
     // xxx
 });
 推断">
-<meta property="og:updated_time" content="2016-07-01T10:31:03.000Z">
+<meta property="og:updated_time" content="2016-07-01T10:57:23.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="angular依赖注入">
 <meta name="twitter:description" content="声明一个controller有很多种写法都能运行成功, 那么各种方法的的却别是什么呢，下面咱们讲讲。
@@ -349,6 +349,22 @@ testModule.controller(&apos;testCtrl&apos;, [&apos;$scope&apos;, &apos;$rootScop
     // 当然依然可以起名叫$scope
 }]);
 </code></pre><p>一样可以随便压缩代码</p>
+<pre><code>var testModule = angular.module(&apos;testModule&apos;, []);
+testModule.factory(&apos;book&apos;, function () {
+    return {
+        name: &apos;程序员宝典&apos;
+    }
+});
+testModule.controller(&apos;testCtrl&apos;, [&apos;$scope&apos;, &apos;$injector&apos;, 
+    function($scope, $injector){
+        $injector.invoke(function(book){
+            // 这样一样可以引入book这个factory
+            console.log(book.name);
+        })
+    }
+]);
+</code></pre><p>看看angular官方给的例子吧</p>
+<p><a href="https://docs.angularjs.org/api/ng/function/angular.injector" target="_blank" rel="external">https://docs.angularjs.org/api/ng/function/angular.injector</a></p>
 <p>今天才了解了这些玩意是个什么状态… 哈哈。 编写指令时一样</p>
 
       

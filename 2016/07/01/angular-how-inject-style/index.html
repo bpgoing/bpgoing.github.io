@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=5.0.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="js-xlsx," />
+  <meta name="keywords" content="ruby, rails, sails" />
 
 
 
@@ -59,25 +59,19 @@
 
 
 
-<meta name="description" content="需求：完整导入导出excel, 于是又一通Google。发现了以下玩意
-前端解析excel/nodejs也可以 https://github.com/SheetJS/js-xlsx
-前端呈现excel样式,不过Jquery的 https://handsontable.com
-如果有angular的就好了，想着ui-grid的可以, 但需要做的工作太多, 时间紧任务重, 还是拿现成的吧(不是我的风格">
+<meta name="description" content="声明一个controller有很多种写法都能运行成功, 那么各种方法的的却别是什么呢，下面咱们讲讲。
+###推断式注入    var testModule = angular.module(‘testModule’, []);    testModule.controller(‘testCtrl’, function($scope){        // xxx    });推断性注入是angul">
 <meta property="og:type" content="article">
-<meta property="og:title" content="使用js-xlsx处理excel">
-<meta property="og:url" content="http://blog.zhuxiaowu.com/2016/06/26/xlsx-excel-basic/index.html">
+<meta property="og:title" content="angular依赖注入">
+<meta property="og:url" content="http://blog.zhuxiaowu.com/2016/07/01/angular-how-inject-style/index.html">
 <meta property="og:site_name" content="bpgoing的博客">
-<meta property="og:description" content="需求：完整导入导出excel, 于是又一通Google。发现了以下玩意
-前端解析excel/nodejs也可以 https://github.com/SheetJS/js-xlsx
-前端呈现excel样式,不过Jquery的 https://handsontable.com
-如果有angular的就好了，想着ui-grid的可以, 但需要做的工作太多, 时间紧任务重, 还是拿现成的吧(不是我的风格">
-<meta property="og:updated_time" content="2016-06-27T14:55:48.000Z">
+<meta property="og:description" content="声明一个controller有很多种写法都能运行成功, 那么各种方法的的却别是什么呢，下面咱们讲讲。
+###推断式注入    var testModule = angular.module(‘testModule’, []);    testModule.controller(‘testCtrl’, function($scope){        // xxx    });推断性注入是angul">
+<meta property="og:updated_time" content="2016-07-01T10:29:08.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="使用js-xlsx处理excel">
-<meta name="twitter:description" content="需求：完整导入导出excel, 于是又一通Google。发现了以下玩意
-前端解析excel/nodejs也可以 https://github.com/SheetJS/js-xlsx
-前端呈现excel样式,不过Jquery的 https://handsontable.com
-如果有angular的就好了，想着ui-grid的可以, 但需要做的工作太多, 时间紧任务重, 还是拿现成的吧(不是我的风格">
+<meta name="twitter:title" content="angular依赖注入">
+<meta name="twitter:description" content="声明一个controller有很多种写法都能运行成功, 那么各种方法的的却别是什么呢，下面咱们讲讲。
+###推断式注入    var testModule = angular.module(‘testModule’, []);    testModule.controller(‘testCtrl’, function($scope){        // xxx    });推断性注入是angul">
 
 
 
@@ -95,7 +89,7 @@
   };
 </script>
 
-  <title> 使用js-xlsx处理excel | bpgoing的博客 </title>
+  <title> angular依赖注入 | bpgoing的博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -271,7 +265,7 @@
             
             
               
-                使用js-xlsx处理excel
+                angular依赖注入
               
             
           </h1>
@@ -283,8 +277,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-06-26T09:33:04+08:00" content="2016-06-26">
-              2016-06-26
+            <time itemprop="dateCreated" datetime="2016-07-01T18:28:36+08:00" content="2016-07-01">
+              2016-07-01
             </time>
           </span>
 
@@ -294,8 +288,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/06/26/xlsx-excel-basic/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/26/xlsx-excel-basic/" itemprop="commentsCount"></span>
+                <a href="/2016/07/01/angular-how-inject-style/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/01/angular-how-inject-style/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -316,207 +310,31 @@
       
 
       
-        <p>需求：完整导入导出excel, 于是又一通Google。<br>发现了以下玩意</p>
-<p>前端解析excel/nodejs也可以 <a href="https://github.com/SheetJS/js-xlsx" target="_blank" rel="external">https://github.com/SheetJS/js-xlsx</a></p>
-<p>前端呈现excel样式,不过Jquery的 <a href="https://handsontable.com" target="_blank" rel="external">https://handsontable.com</a></p>
-<p>如果有angular的就好了，想着ui-grid的可以, 但需要做的工作太多, 时间紧任务重, 还是拿现成的吧(不是我的风格)</p>
-<h3 id="xlsx_u5165_u95E8"><a href="#xlsx_u5165_u95E8" class="headerlink" title="xlsx入门"></a>xlsx入门</h3><p>xlsx支持以下格式读取</p>
-<ul>
-<li>Excel 2007+ XML Formats (XLSX/XLSM)</li>
-<li>Excel 2007+ Binary Format (XLSB)</li>
-<li>Excel 2003-2004 XML Format (XML “SpreadsheetML”)</li>
-<li>Excel 97-2004 (XLS BIFF8)</li>
-<li>Excel 5.0/95 (XLS BIFF5)</li>
-<li>OpenDocument Spreadsheet (ODS)</li>
-</ul>
-<p>支持写入文件的格式</p>
-<ul>
-<li>XLSX</li>
-<li>CSV (and general DSV)</li>
-<li>JSON and JS objects (various styles)</li>
-</ul>
-<h3 id="u5B89_u88C5"><a href="#u5B89_u88C5" class="headerlink" title="安装"></a>安装</h3><p>npm安装</p>
-<pre><code>npm install xlsx
-</code></pre><p>浏览器引入</p>
-<pre><code>&lt;script lang=&quot;javascript&quot; src=&quot;dist/xlsx.core.min.js&quot;&gt;&lt;/script&gt;
-</code></pre><p>bower安装</p>
-<pre><code>bower install js-xlsx
-</code></pre><h3 id="u53EF_u9009_u6A21_u5757"><a href="#u53EF_u9009_u6A21_u5757" class="headerlink" title="可选模块"></a>可选模块</h3><p>node版本自动加载依赖。<br>有些模块过大，却在特定场景使用，所以没放进核心库中。为了浏览器能够使用必须引入</p>
-<pre><code>&lt;!-- international support from https://github.com/sheetjs/js-codepage --&gt;
-&lt;script src=&quot;dist/cpexcel.js&quot;&gt;&lt;/script&gt;
-&lt;!-- ODS support --&gt;
-&lt;script src=&quot;dist/ods.js&quot;&gt;&lt;/script&gt;
-</code></pre><p>dist目录下生成好了压缩版本<br>包含全部功能的单文件版本dist/xlsx.full.min.js</p>
-<h3 id="u4F4E_u7248_u672Cjs_u6807_u51C6_u517C_u5BB9_u6027"><a href="#u4F4E_u7248_u672Cjs_u6807_u51C6_u517C_u5BB9_u6027" class="headerlink" title="低版本js标准兼容性"></a>低版本js标准兼容性</h3><p>xlxs.js使用的ES5标准, 低版本的浏览器需要<a href="http://git.io/QVh77g" target="_blank" rel="external">Polyfills</a>支持。引入<a href="https://github.com/SheetJS/js-xlsx/blob/master/shim.js" target="_blank" rel="external">shim</a>即可</p>
-<pre><code>&lt;script type=&quot;text/javascript&quot; src=&quot;/path/to/shim.js&quot;&gt;&lt;/script&gt;
-</code></pre><p>要在xlxs之前加载</p>
-<h3 id="u89E3_u6790Workbooks"><a href="#u89E3_u6790Workbooks" class="headerlink" title="解析Workbooks"></a>解析Workbooks</h3><p>一些概念</p>
-<pre><code>workbook   指整个excel, 读取excel文件得到的对象
-worksheet  指excel中的一个表, 一个excel至少一张表
-cell       指单元格
-</code></pre><p>node读取</p>
-<pre><code>XLSX = require(&apos;xlsx&apos;);
-var workbook = XLSX.readFile(&apos;test.xlsx&apos;);
-</code></pre><p>ajax读取，兼容低版本的请看<a href="http://oss.sheetjs.com/js-xlsx/ajax.html" target="_blank" rel="external">http://oss.sheetjs.com/js-xlsx/ajax.html</a></p>
-<pre><code>/* set up XMLHttpRequest */
-var url = &quot;test_files/formula_stress_test_ajax.xlsx&quot;;
-var oReq = new XMLHttpRequest();
-oReq.open(&quot;GET&quot;, url, true);
-oReq.responseType = &quot;arraybuffer&quot;;
-
-oReq.onload = function(e) {
-    var arraybuffer = oReq.response;
-
-    /* convert data to binary string */
-    var data = new Uint8Array(arraybuffer);
-    var arr = new Array();
-    for(var i = 0; i != data.length; ++i) arr[i] = String.fromCharCode(data[i]);
-    var bstr = arr.join(&quot;&quot;);
-
-    /* Call XLSX */
-    var workbook = XLSX.read(bstr, {type:&quot;binary&quot;});
-
-    /* DO SOMETHING WITH workbook HERE */
-}
-oReq.send();
-</code></pre><p>HTML5拖拽，使用readAsBinaryString读取</p>
-<pre><code>/* set up drag-and-drop event */
-function handleDrop(e) {
-    e.stopPropagation();
-    e.preventDefault();
-    var files = e.dataTransfer.files;
-    var i,f;
-    for (i = 0, f = files[i]; i != files.length; ++i) {
-        var reader = new FileReader();
-        var name = f.name;
-        reader.onload = function(e) {
-            var data = e.target.result;
-
-            /* if binary string, read with type &apos;binary&apos; */
-            var workbook = XLSX.read(data, {type: &apos;binary&apos;});
-
-            /* DO SOMETHING WITH workbook HERE */
-        };
-        reader.readAsBinaryString(f);
-    }
-}
-drop_dom_element.addEventListener(&apos;drop&apos;, handleDrop, false);
-</code></pre><p>HTML5 输入框使用readAsBinaryString读取</p>
-<pre><code>function handleFile(e) {
-    var files = e.target.files;
-    var i,f;
-    for (i = 0, f = files[i]; i != files.length; ++i) {
-        var reader = new FileReader();
-        var name = f.name;
-        reader.onload = function(e) {
-            var data = e.target.result;
-
-            var workbook = XLSX.read(data, {type: &apos;binary&apos;});
-
-            /* DO SOMETHING WITH workbook HERE */
-        };
-        reader.readAsBinaryString(f);
-    }
-}
-input_dom_element.addEventListener(&apos;change&apos;, handleFile, false);
-</code></pre><p>真累…<br>记些要点</p>
-<p>###接口</p>
-<pre><code>XLSX.utils.encode_row(0)                             -&gt; &apos;1&apos;
-XLSX.utils.decode_row(&apos;1&apos;)                           -&gt; 0
-XLSX.utils.encode_col(4)                             -&gt; &apos;E&apos;
-XLSX.utils.decode_col(&apos;E&apos;)                           -&gt; 4
-XLSX.utils.encode_cell({c:0,r:2})                    -&gt; &apos;A3&apos;
-XLSX.utils.decode_cell(&apos;C4&apos;)                         -&gt; { c: 2, r: 3 }
-XLSX.utils.encode_range({s:{c:0,r:1},e:{c:2,r:4}})   -&gt; &apos;A2:C5&apos;
-XLSX.utils.decode_range(&apos;A5:C6&apos;)                     -&gt; {s:{c:0,r:4},e:{c:2,r:5}}
-</code></pre><p>###Workbook / Worksheet / Cell 对象描述</p>
-<p>####一般结构<br>这样表示一个单元格地址 {c:C, r:R}, 大写C和R是0开始的索引值。B5单元格的表示方法就是{c:1, r:4} c就是列, r就是行。</p>
-<p>这样表示一个单元格范围 {s:S, e:E}, 范围里S是第一个单元格, E是最后一个单元格。像A3:B7对应就是{s:{c:0, r:2}, e:{c:1, r:6}}。这样就知道哪些单元格是合并的了</p>
-<p>单元格对象</p>
-<table>
-<thead>
-<tr>
-<th>Key</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>v</code></td>
-<td>raw value (see Data Types section for more info)</td>
-</tr>
-<tr>
-<td><code>w</code></td>
-<td>格式化文本 (如果支持)</td>
-</tr>
-<tr>
-<td><code>t</code></td>
-<td>数据类型: <code>b</code> Boolean, <code>n</code> 数字, <code>e</code> 错误, <code>s</code> 字符串, <code>d</code> 日期</td>
-</tr>
-<tr>
-<td><code>f</code></td>
-<td>公式 (如果支持)</td>
-</tr>
-<tr>
-<td><code>r</code></td>
-<td>富文本编码 (如果支持, node读出来似乎不支持, 乱码)</td>
-</tr>
-<tr>
-<td><code>h</code></td>
-<td>HTML 渲染的富文本 (如果支持)</td>
-</tr>
-<tr>
-<td><code>c</code></td>
-<td>comments associated with the cell ** 没见过</td>
-</tr>
-<tr>
-<td><code>z</code></td>
-<td>number format string associated with the cell (if requested)</td>
-</tr>
-<tr>
-<td><code>l</code></td>
-<td>单元格的链接地址 (.Target holds link, .tooltip is tooltip)</td>
-</tr>
-<tr>
-<td><code>s</code></td>
-<td>the style/theme of the cell (if applicable)单元格样式(支持有限)</td>
-</tr>
-</tbody>
-</table>
-<p>###Worksheet Object<br>这些特殊字段都以!开头</p>
-<p>!ref 表格的范围</p>
-<p>最后的最后发现对样式的支持完全没有…. 看issues也是….唉。</p>
-<p>隆重介绍一下这个fork</p>
-<p><a href="https://github.com/protobi/js-xlsx" target="_blank" rel="external">https://github.com/protobi/js-xlsx</a></p>
-<p>一下安静了。。。谁用谁知道</p>
+        <p>声明一个controller有很多种写法都能运行成功, 那么各种方法的的却别是什么呢，下面咱们讲讲。</p>
+<p>###推断式注入<br>    var testModule = angular.module(‘testModule’, []);<br>    testModule.controller(‘testCtrl’, function($scope){<br>        // xxx<br>    });<br>推断性注入是angular根据你传入的参数(这里只有$scope)来给你自动注入。</p>
+<p>但是这样有个坏处, 就是如果你的代码发布的时候被压缩, $scope可能被压缩成a, 这样代码就会报错了。。</p>
+<p>所以这种方式不被推荐</p>
+<p>###声明式注入<br>    var testModule = angular.module(‘testModule’, []);<br>    var testCtrl = function($scope, rs){<br>        // 这里的rs其实就是$rootScope<br>    }<br>    testCtrl.$inject = [‘$scope’, ‘$rootScope’];<br>    testModule.controller(‘testCtrl’, testCtrl);<br>就要多写一行, 别的没啥影响, 觉得这样挺好的, 还有就是随便压缩代码。</p>
+<p>###内联式注入<br>    var testModule = angular.module(‘testModule’, []);<br>    testModule.controller(‘testCtrl’, [‘$scope’, ‘$rootScope’, function(scope, rs){<br>        // scope就是$scope, rs 就是rootScope<br>        // 当然依然可以起名叫$scope<br>    }]);<br>一样可以随便压缩代码</p>
+<p>今天才了解了这些玩意是个什么状态… 哈哈。 编写指令时一样</p>
 
       
     </div>
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/js-xlsx/" rel="tag">#js-xlsx</a>
-          
-        </div>
-      
 
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/06/21/html5-camera-barcode-scan-1d-2d/" rel="next" title="html5配合摄像头实现扫码">
-                <i class="fa fa-chevron-left"></i> html5配合摄像头实现扫码
+              <a href="/2016/06/26/xlsx-excel-basic/" rel="next" title="使用js-xlsx处理excel">
+                <i class="fa fa-chevron-left"></i> 使用js-xlsx处理excel
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/07/01/angular-how-inject-style/" rel="prev" title="angular依赖注入">
-                angular依赖注入 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -542,8 +360,8 @@ XLSX.utils.decode_range(&apos;A5:C6&apos;)                     -&gt; {s:{c:0,r:4
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/06/26/xlsx-excel-basic/"
-           data-title="使用js-xlsx处理excel" data-url="http://blog.zhuxiaowu.com/2016/06/26/xlsx-excel-basic/">
+      <div class="ds-thread" data-thread-key="2016/07/01/angular-how-inject-style/"
+           data-title="angular依赖注入" data-url="http://blog.zhuxiaowu.com/2016/07/01/angular-how-inject-style/">
       </div>
     
   </div>
@@ -651,7 +469,7 @@ XLSX.utils.decode_range(&apos;A5:C6&apos;)                     -&gt; {s:{c:0,r:4
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#xlsx_u5165_u95E8"><span class="nav-number">1.</span> <span class="nav-text">xlsx入门</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u5B89_u88C5"><span class="nav-number">2.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u53EF_u9009_u6A21_u5757"><span class="nav-number">3.</span> <span class="nav-text">可选模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u4F4E_u7248_u672Cjs_u6807_u51C6_u517C_u5BB9_u6027"><span class="nav-number">4.</span> <span class="nav-text">低版本js标准兼容性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u89E3_u6790Workbooks"><span class="nav-number">5.</span> <span class="nav-text">解析Workbooks</span></a></li></ol></div>
+              <p class="post-toc-empty">此文章未包含目录</p>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">

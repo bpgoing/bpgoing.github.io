@@ -4,7 +4,7 @@
   <subtitle><![CDATA[6年+的互联网开发经验]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.zhuxiaowu.com/"/>
-  <updated>2016-07-01T10:57:23.000Z</updated>
+  <updated>2016-08-11T07:21:41.000Z</updated>
   <id>http://blog.zhuxiaowu.com/</id>
   
   <author>
@@ -13,6 +13,58 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[html5配合canvas签名提取]]></title>
+    <link href="http://blog.zhuxiaowu.com/2016/08/11/html5-canvas-image-signature/"/>
+    <id>http://blog.zhuxiaowu.com/2016/08/11/html5-canvas-image-signature/</id>
+    <published>2016-08-11T07:16:52.000Z</published>
+    <updated>2016-08-11T07:21:41.000Z</updated>
+    <content type="html"><![CDATA[<p>做的检测系统，为了简化操作，在打印到A4纸上时免去N个人的签名，需要把签名上传系统 打印时把签名一起打印</p>
+<p>原来做法是把人的签名交给设计处理，抠出来，做成一个透明和一个白底的。像下面这样的图</p>
+<p><img src="/uploads/html5-canvas-signature-original.png" alt="签名原图" title="签名原图"></p>
+<p>这样做的问题就是，如果系统卖给别人，每个人的签名都要设计去做。一旦卖出软件太多的话就并不觉得方便了，人员离职入职都要做处理。付出跟回报不成正比</p>
+<p>省去每个签名都要处理，想到两个处理方式, 都希望前端去处理好。</p>
+<p>一是在系统上做个画板，每个人自己写上去自己的签名。</p>
+<p>二是把上面的签名的图上传系统，系统通过canvas自己把签名抠出来。</p>
+<p>一的做法是很多OA的系统做法吧，因为网络上搜到了很多，大家都说为了解决签名的需求而做的写字板。</p>
+<p>在这里分享几个我搜到的成果，觉得很不错。</p>
+<p>最喜欢的一个 <a href="https://github.com/szimek/signature_pad" target="_blank" rel="external">https://github.com/szimek/signature_pad</a></p>
+<p>这个也很酷 <a href="https://willowsystems.github.io/jSignature/" target="_blank" rel="external">https://willowsystems.github.io/jSignature/</a></p>
+<p>还有这个 <a href="http://www.oschina.net/code/snippet_2352644_49974" target="_blank" rel="external">http://www.oschina.net/code/snippet_2352644_49974</a></p>
+<p>这个是做水印的 <a href="http://www.sjsjw.com/101/005918MYM002927/" target="_blank" rel="external">http://www.sjsjw.com/101/005918MYM002927/</a></p>
+<p>但这种做法其实很鸡肋，因为通过鼠标去写签名，跟笔写在纸上太不一样了，因为一旦有问题，文字鉴别都鉴别不出来。。。。只能本人确定是不是自己的签名，看看效果</p>
+<p><img src="/uploads/html5-canvas-signature-huaban.png" alt="画板签名" title="画板签名"></p>
+<p>您要是硬说买电脑外设画板 来写签名，俺也没办法。 1 俺不知道效果咋样，因为没画板测试。 2是画板能不能直接画上谁知道呢。3是难道每个需要签名的人都给买个画板？还是一个画板轮换着用？增加成本不错，方便易用性也太low！</p>
+<p>所以，在这里就努力往第二种解决方式努力吧，好在网上搜到了很多牛掰的例子，搞定签名还是so easy的。</p>
+<p>#####先说说思路</p>
+<ol>
+<li>做好上传</li>
+<li>canvas拿到图片，处理成黑白</li>
+<li>之后通过文字识别把正确的签名之外的部分去掉</li>
+<li>重新做透明背景或白色背景</li>
+</ol>
+<p>#####再分享找到的例子</p>
+<p>canvas+html5做的人脸识别 <a href="http://wesbos.com/html5-video-face-detection-canvas-javascript/" target="_blank" rel="external">http://wesbos.com/html5-video-face-detection-canvas-javascript/</a></p>
+<p>不知道是啥 <a href="http://techslides.com/object-detection-with-html5-getusermedia" target="_blank" rel="external">http://techslides.com/object-detection-with-html5-getusermedia</a></p>
+<p>图片处理 <a href="http://www.html5rocks.com/en/tutorials/canvas/imagefilters/" target="_blank" rel="external">http://www.html5rocks.com/en/tutorials/canvas/imagefilters/</a></p>
+<p>#####最后把结果分享给大家<br><img src="/uploads/html5-canvas-signature-result.png" alt="处理后的结果" title="处理后的结果"></p>
+<p>#####聊聊解决思路，看看解决代码</p>
+<p>待续……</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>做的检测系统，为了简化操作，在打印到A4纸上时免去N个人的签名，需要把签名上传系统 打印时把签名一起打印</p>
+<p>原来做法是把人的签名交给设计处理，抠出来，做成一个透明和一个白底的。像下面这样的图</p>
+<p><img src="/uploads/html5-can]]>
+    </summary>
+    
+      <category term="canvas" scheme="http://blog.zhuxiaowu.com/tags/canvas/"/>
+    
+      <category term="html5" scheme="http://blog.zhuxiaowu.com/tags/html5/"/>
+    
+      <category term="signature" scheme="http://blog.zhuxiaowu.com/tags/signature/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[angular依赖注入]]></title>

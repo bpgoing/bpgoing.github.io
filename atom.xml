@@ -4,7 +4,7 @@
   <subtitle><![CDATA[6年+的互联网开发经验]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.zhuxiaowu.com/"/>
-  <updated>2016-08-12T06:49:33.000Z</updated>
+  <updated>2016-08-12T06:54:23.000Z</updated>
   <id>http://blog.zhuxiaowu.com/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://blog.zhuxiaowu.com/2016/08/11/html5-canvas-image-signature/"/>
     <id>http://blog.zhuxiaowu.com/2016/08/11/html5-canvas-image-signature/</id>
     <published>2016-08-11T07:16:52.000Z</published>
-    <updated>2016-08-12T06:49:33.000Z</updated>
+    <updated>2016-08-12T06:54:23.000Z</updated>
     <content type="html"><![CDATA[<p>做的检测系统，为了把结果打印到A4纸上时免去N个人的手写签名。</p>
 <p>省事做法是把手写签名拍照交给设计处理，之后放到系统上 打印或预览时把签名放上。</p>
 <p>像下面这图</p>
@@ -51,7 +51,7 @@
 <p>图片处理 <a href="http://www.html5rocks.com/en/tutorials/canvas/imagefilters/" target="_blank" rel="external">http://www.html5rocks.com/en/tutorials/canvas/imagefilters/</a></p>
 <p>#####最后把结果分享给大家<br><img src="/uploads/html5-canvas-signature-result.png" alt="处理后的结果" title="处理后的结果"></p>
 <p>#####聊聊解决思路，看看解决代码</p>
-<div class="mp4"><br>    <video controls preload="auto"><br>        <source src="/uploads/html5-canvas-signature.mp4" type="video/mp4"><br>        <source src="/uploads/html5-canvas-signature.mp4" type="video/ogg"><br>    </video><br></div>
+<div class="mp4"><br>    <video controls preload="auto" style="max-width: 100%;"><br>        <source src="/uploads/html5-canvas-signature.mp4" type="video/mp4"><br>        <source src="/uploads/html5-canvas-signature.mp4" type="video/ogg"><br>    </video><br></div>
 ]]></content>
     <summary type="html">
     <![CDATA[<p>做的检测系统，为了把结果打印到A4纸上时免去N个人的手写签名。</p>

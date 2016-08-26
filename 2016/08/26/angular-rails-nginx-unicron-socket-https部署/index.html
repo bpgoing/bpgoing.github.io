@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=5.0.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="angular,sails," />
+  <meta name="keywords" content="DNS解析,angularjs,https,nginx,rails,socket,ssl,局域网," />
 
 
 
@@ -59,20 +59,26 @@
 
 
 
-<meta name="description" content="说学习sails好久了, 之所以想学它, 只是因为原来做rails时被它各种蹩脚玩意给折腾的。
-有些人很喜欢rails, 开始我也很喜欢, 各种库, 各种支持, 加上优雅的语法。熟悉后就各种烦各种不想用, 这货真是啥玩意都往里加, 啥新东西都想支持, 不再像它刚开始时的那么纯粹, 简便。 啥时候rails的组件能像sails那样醒目, 库能像glup提倡的那样: 每个插件只完成一个功能就好了, 别">
+<meta name="description" content="每次部署都能吐出一口老血！！！唉，随便写写吧，因为牵扯东西很多
+项目前端是angularjs，后端rails，还有nodejs服务做长连接通知服务。
+其中angularjs是单独的，用gulp做项目管理和发布，也做到了一键发布。 具体gulp如何做的网上有很多例子，就算写也可以单独拿出一篇来。
+因为项目用到了摄像头扫码, 在chrome下扫码需要https协议才能打开摄像头, 所以nginx部署的">
 <meta property="og:type" content="article">
-<meta property="og:title" content="一个简单的项目架构">
-<meta property="og:url" content="http://blog.zhuxiaowu.com/2015/05/01/a-simple-system-architecture/index.html">
+<meta property="og:title" content="angular+rails局域网部署">
+<meta property="og:url" content="http://blog.zhuxiaowu.com/2016/08/26/angular-rails-nginx-unicron-socket-https部署/index.html">
 <meta property="og:site_name" content="bpgoing的博客">
-<meta property="og:description" content="说学习sails好久了, 之所以想学它, 只是因为原来做rails时被它各种蹩脚玩意给折腾的。
-有些人很喜欢rails, 开始我也很喜欢, 各种库, 各种支持, 加上优雅的语法。熟悉后就各种烦各种不想用, 这货真是啥玩意都往里加, 啥新东西都想支持, 不再像它刚开始时的那么纯粹, 简便。 啥时候rails的组件能像sails那样醒目, 库能像glup提倡的那样: 每个插件只完成一个功能就好了, 别">
-<meta property="og:image" content="http://blog.zhuxiaowu.com/uploads/tsdsysglxt.png">
-<meta property="og:updated_time" content="2016-05-28T09:11:01.000Z">
+<meta property="og:description" content="每次部署都能吐出一口老血！！！唉，随便写写吧，因为牵扯东西很多
+项目前端是angularjs，后端rails，还有nodejs服务做长连接通知服务。
+其中angularjs是单独的，用gulp做项目管理和发布，也做到了一键发布。 具体gulp如何做的网上有很多例子，就算写也可以单独拿出一篇来。
+因为项目用到了摄像头扫码, 在chrome下扫码需要https协议才能打开摄像头, 所以nginx部署的">
+<meta property="og:image" content="http://blog.zhuxiaowu.com/uploads/jiance-me-deploy-xiaoguo.png">
+<meta property="og:updated_time" content="2016-08-26T09:25:02.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="一个简单的项目架构">
-<meta name="twitter:description" content="说学习sails好久了, 之所以想学它, 只是因为原来做rails时被它各种蹩脚玩意给折腾的。
-有些人很喜欢rails, 开始我也很喜欢, 各种库, 各种支持, 加上优雅的语法。熟悉后就各种烦各种不想用, 这货真是啥玩意都往里加, 啥新东西都想支持, 不再像它刚开始时的那么纯粹, 简便。 啥时候rails的组件能像sails那样醒目, 库能像glup提倡的那样: 每个插件只完成一个功能就好了, 别">
+<meta name="twitter:title" content="angular+rails局域网部署">
+<meta name="twitter:description" content="每次部署都能吐出一口老血！！！唉，随便写写吧，因为牵扯东西很多
+项目前端是angularjs，后端rails，还有nodejs服务做长连接通知服务。
+其中angularjs是单独的，用gulp做项目管理和发布，也做到了一键发布。 具体gulp如何做的网上有很多例子，就算写也可以单独拿出一篇来。
+因为项目用到了摄像头扫码, 在chrome下扫码需要https协议才能打开摄像头, 所以nginx部署的">
 
 
 
@@ -90,7 +96,7 @@
   };
 </script>
 
-  <title> 一个简单的项目架构 | bpgoing的博客 </title>
+  <title> angular+rails局域网部署 | bpgoing的博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -266,7 +272,7 @@
             
             
               
-                一个简单的项目架构
+                angular+rails局域网部署
               
             
           </h1>
@@ -278,38 +284,19 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-05-01T19:38:17+08:00" content="2015-05-01">
-              2015-05-01
+            <time itemprop="dateCreated" datetime="2016-08-26T17:23:20+08:00" content="2016-08-26">
+              2016-08-26
             </time>
           </span>
 
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/language/" itemprop="url" rel="index">
-                    <span itemprop="name">language</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
           
 
           
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/05/01/a-simple-system-architecture/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/05/01/a-simple-system-architecture/" itemprop="commentsCount"></span>
+                <a href="/2016/08/26/angular-rails-nginx-unicron-socket-https部署/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/26/angular-rails-nginx-unicron-socket-https部署/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -330,19 +317,13 @@
       
 
       
-        <p>说学习sails好久了, 之所以想学它, 只是因为原来做rails时被它各种蹩脚玩意给折腾的。</p>
-<p>有些人很喜欢rails, 开始我也很喜欢, 各种库, 各种支持, 加上优雅的语法。熟悉后就各种烦各种不想用, 这货真是啥玩意都往里加, 啥新东西都想支持, 不再像它刚开始时的那么纯粹, 简便。 啥时候rails的组件能像sails那样醒目, 库能像glup提倡的那样: 每个插件只完成一个功能就好了, 别做万能的Rambo好不！！！</p>
-<p>额， 这仅限于4.x及以前版本, 好久没用过了是不是有了变化不知道, 希望能变轻点吧。</p>
-<p>说回正题, 最近有个基于web的实验室管理系统项目, 想了想系统的复杂性, 还有管理系统的使用习惯, 准备使用以下架构</p>
-<p>关于b/s的管理系统, 可以参考<a href="https://github.com/xufei/blog/blob/master/posts/2014-04-27-%E5%9F%BA%E4%BA%8EAngularJS%E7%9A%84%E4%BC%81%E4%B8%9A%E8%BD%AF%E4%BB%B6%E5%89%8D%E7%AB%AF%E6%9E%B6%E6%9E%84.md" target="_blank" rel="external">这篇文章</a>看看</p>
-<p>看完文章就该说说架构了, 以前总觉得架构高大上, 现在看也就这样, 适合项目就最好。</p>
-<p>前端: bootstrap+angular+jquery+socket.io+gulp</p>
-<p>后端: node+sails+mysql(mongodb), 因为没啥访问速度要求, 把默认依赖redis的组件改成mysql(真是没一个框架是满意的)</p>
-<p>装上sails后看了看，这货也不是很满意, 库的依赖是grunt管理的, 这个先不管吧。 但是自己又封装了socket.io, 人家已经写这么好了, 你居然又画蛇添足。。悲催！！ 依赖的ejs模板引擎还好, 去掉也方便。再具体的还没看，慢慢完善吧，总比rails好些, 项目结构清晰, 业务复杂后也不是把所有功能集中在model, 还支持websocket。</p>
-<p>先想好页面布局, 大概是这样子的, 项目管理系统嘛, 单页面项目没有刷新最实用, angular+angular-ui-router配合简直了(当然还有像<a href="http://cn.vuejs.org/" target="_blank" rel="external">vue.js</a>也不错)。 还有<a href="https://github.com/xufei/ng-control/issues/2" target="_blank" rel="external">这篇文章</a>可参考。</p>
-<p>关于angular-ui-router可以单独写篇文章介绍</p>
-<p><img src="/uploads/tsdsysglxt.png" alt="页面基本布局"></p>
-<p>后续再补</p>
+        <p>每次部署都能吐出一口老血！！！唉，随便写写吧，因为牵扯东西很多</p>
+<p>项目前端是angularjs，后端rails，还有nodejs服务做长连接通知服务。</p>
+<p>其中angularjs是单独的，用gulp做项目管理和发布，也做到了一键发布。 具体gulp如何做的网上有很多例子，就算写也可以单独拿出一篇来。</p>
+<p>因为项目用到了摄像头扫码, 在chrome下扫码需要https协议才能打开摄像头, 所以nginx部署的时候增加了免费的ssl模块，如何申请请自行Google。</p>
+<p>好多问题是ssl可以部署到局域网吗？ 经过实践是可以的，因为ssl似乎只针对域名绑定, 局域网内只允许域名访问服务器即可。</p>
+<p>既然是局域网域名访问，要让每台机器在hosts设置域名ip映射，那你就不配称为一个程序员，所以服务器又做了DNS 解析服务，在交换机或者路由器的dns地址指到服务器地址即可访问。</p>
+<p><img src="/uploads/jiance-me-deploy-xiaoguo.png" alt="效果图"></p>
 
       
     </div>
@@ -351,9 +332,21 @@
       
         <div class="post-tags">
           
-            <a href="/tags/angular/" rel="tag">#angular</a>
+            <a href="/tags/DNS解析/" rel="tag">#DNS解析</a>
           
-            <a href="/tags/sails/" rel="tag">#sails</a>
+            <a href="/tags/angularjs/" rel="tag">#angularjs</a>
+          
+            <a href="/tags/https/" rel="tag">#https</a>
+          
+            <a href="/tags/nginx/" rel="tag">#nginx</a>
+          
+            <a href="/tags/rails/" rel="tag">#rails</a>
+          
+            <a href="/tags/socket/" rel="tag">#socket</a>
+          
+            <a href="/tags/ssl/" rel="tag">#ssl</a>
+          
+            <a href="/tags/局域网/" rel="tag">#局域网</a>
           
         </div>
       
@@ -362,13 +355,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2016/08/11/html5-canvas-image-signature/" rel="next" title="html5配合canvas签名提取">
+                <i class="fa fa-chevron-left"></i> html5配合canvas签名提取
+              </a>
+            
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/02/12/ionic-angularjs-cordova-env-development/" rel="prev" title="Ionic+Angularjs+PhoneGap开发环境搭建">
-                Ionic+Angularjs+PhoneGap开发环境搭建 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -394,8 +387,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2015/05/01/a-simple-system-architecture/"
-           data-title="一个简单的项目架构" data-url="http://blog.zhuxiaowu.com/2015/05/01/a-simple-system-architecture/">
+      <div class="ds-thread" data-thread-key="2016/08/26/angular-rails-nginx-unicron-socket-https部署/"
+           data-title="angular+rails局域网部署" data-url="http://blog.zhuxiaowu.com/2016/08/26/angular-rails-nginx-unicron-socket-https部署/">
       </div>
     
   </div>

@@ -4,7 +4,7 @@
   <subtitle><![CDATA[6年+的互联网开发经验]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.zhuxiaowu.com/"/>
-  <updated>2016-08-12T06:54:23.000Z</updated>
+  <updated>2016-08-26T09:25:02.000Z</updated>
   <id>http://blog.zhuxiaowu.com/</id>
   
   <author>
@@ -13,6 +13,44 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[angular+rails局域网部署]]></title>
+    <link href="http://blog.zhuxiaowu.com/2016/08/26/angular-rails-nginx-unicron-socket-https%E9%83%A8%E7%BD%B2/"/>
+    <id>http://blog.zhuxiaowu.com/2016/08/26/angular-rails-nginx-unicron-socket-https部署/</id>
+    <published>2016-08-26T09:23:20.000Z</published>
+    <updated>2016-08-26T09:25:02.000Z</updated>
+    <content type="html"><![CDATA[<p>每次部署都能吐出一口老血！！！唉，随便写写吧，因为牵扯东西很多</p>
+<p>项目前端是angularjs，后端rails，还有nodejs服务做长连接通知服务。</p>
+<p>其中angularjs是单独的，用gulp做项目管理和发布，也做到了一键发布。 具体gulp如何做的网上有很多例子，就算写也可以单独拿出一篇来。</p>
+<p>因为项目用到了摄像头扫码, 在chrome下扫码需要https协议才能打开摄像头, 所以nginx部署的时候增加了免费的ssl模块，如何申请请自行Google。</p>
+<p>好多问题是ssl可以部署到局域网吗？ 经过实践是可以的，因为ssl似乎只针对域名绑定, 局域网内只允许域名访问服务器即可。</p>
+<p>既然是局域网域名访问，要让每台机器在hosts设置域名ip映射，那你就不配称为一个程序员，所以服务器又做了DNS 解析服务，在交换机或者路由器的dns地址指到服务器地址即可访问。</p>
+<p><img src="/uploads/jiance-me-deploy-xiaoguo.png" alt="效果图"></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>每次部署都能吐出一口老血！！！唉，随便写写吧，因为牵扯东西很多</p>
+<p>项目前端是angularjs，后端rails，还有nodejs服务做长连接通知服务。</p>
+<p>其中angularjs是单独的，用gulp做项目管理和发布，也做到了一键发布。 具体gulp如何]]>
+    </summary>
+    
+      <category term="DNS解析" scheme="http://blog.zhuxiaowu.com/tags/DNS%E8%A7%A3%E6%9E%90/"/>
+    
+      <category term="angularjs" scheme="http://blog.zhuxiaowu.com/tags/angularjs/"/>
+    
+      <category term="https" scheme="http://blog.zhuxiaowu.com/tags/https/"/>
+    
+      <category term="nginx" scheme="http://blog.zhuxiaowu.com/tags/nginx/"/>
+    
+      <category term="rails" scheme="http://blog.zhuxiaowu.com/tags/rails/"/>
+    
+      <category term="socket" scheme="http://blog.zhuxiaowu.com/tags/socket/"/>
+    
+      <category term="ssl" scheme="http://blog.zhuxiaowu.com/tags/ssl/"/>
+    
+      <category term="局域网" scheme="http://blog.zhuxiaowu.com/tags/%E5%B1%80%E5%9F%9F%E7%BD%91/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[html5配合canvas签名提取]]></title>
